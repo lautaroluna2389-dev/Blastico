@@ -117,7 +117,7 @@
         </div>
         <div>
           <h1 class="text-xl md:text-2xl font-black tracking-wider uppercase gold-gradient-text leading-none">RANKING BLASTICO</h1>
-          <p id="headerSubtitle" class="text-[11px] text-neutral-400 mt-1">Cargando catálogo...</p>
+          <p id="headerSubtitle" class="text-[11px] text-neutral-400 mt-1">Inicia sesión para gestionar tu ranking</p>
         </div>
       </div>
 
@@ -130,27 +130,27 @@
 
       <!-- BOTONES DE NAVEGACIÓN -->
       <div class="flex items-center gap-2 flex-wrap w-full lg:w-auto justify-center lg:justify-end">
-        <button id="viewAlbumsBtn" onclick="switchView('albums')" class="px-3.5 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 border border-yellow-500/50 text-xs font-bold transition flex items-center gap-1.5">
+        <button id="viewAlbumsBtn" type="button" onclick="switchView('albums')" class="px-3.5 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 border border-yellow-500/50 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
           <i class="fa-solid fa-compact-disc"></i> Álbumes
         </button>
-        <button id="viewArtistsBtn" onclick="switchView('artists')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5">
+        <button id="viewArtistsBtn" type="button" onclick="switchView('artists')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer">
           <i class="fa-solid fa-users"></i> Artistas
         </button>
-        <button id="viewSinglesBtn" onclick="switchView('singles')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5 relative">
+        <button id="viewSinglesBtn" type="button" onclick="switchView('singles')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5 relative cursor-pointer">
           <i class="fa-solid fa-music"></i> Sencillos
           <span class="bg-yellow-500 text-black text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase">Nuevo</span>
         </button>
         
-        <button onclick="toggleModal('legendModal')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:text-yellow-400 hover:border-yellow-600/40 text-xs font-semibold transition flex items-center gap-1.5">
+        <button type="button" onclick="toggleModal('legendModal')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:text-yellow-400 hover:border-yellow-600/40 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer">
           <i class="fa-solid fa-list-ol"></i> Guía
         </button>
 
-        <button id="shareBtn" onclick="shareProfile()" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:bg-neutral-800 text-xs font-semibold transition hidden items-center gap-1.5">
+        <button id="shareBtn" type="button" onclick="shareProfile()" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:bg-neutral-800 text-xs font-semibold transition hidden items-center gap-1.5 cursor-pointer">
           <i class="fa-solid fa-share-nodes"></i> Compartir
         </button>
         
-        <button id="authBtn" onclick="toggleAuth()" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:bg-neutral-800 text-xs font-semibold transition flex items-center gap-1.5">
-          <i class="fa-solid fa-lock"></i> Iniciar Sesión
+        <button id="authBtn" type="button" onclick="toggleAuth()" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:bg-neutral-800 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-lock"></i> Iniciar Sesión / Registrarse
         </button>
       </div>
     </div>
@@ -181,15 +181,15 @@
         <span>Gestiona tu colección musical</span>
       </div>
       <div class="flex items-center gap-2.5 flex-wrap">
-        <button id="pasteAlbumBtn" onclick="pasteCopiedAlbum()" class="hidden px-4 py-2 rounded-full bg-yellow-500/15 border border-yellow-500/60 text-yellow-300 hover:bg-yellow-500/25 text-xs font-bold transition flex items-center gap-1.5 animate-pulse">
+        <button id="pasteAlbumBtn" type="button" onclick="pasteCopiedAlbum()" class="hidden px-4 py-2 rounded-full bg-yellow-500/15 border border-yellow-500/60 text-yellow-300 hover:bg-yellow-500/25 text-xs font-bold transition flex items-center gap-1.5 animate-pulse cursor-pointer">
           <i class="fa-solid fa-paste"></i> Pegar Álbum Copiado (<span id="copiedAlbumNameBadge"></span>)
         </button>
 
-        <button onclick="openSingleModal()" class="px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700 text-xs font-bold transition flex items-center gap-1.5">
+        <button type="button" onclick="openSingleModal()" class="px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
           <i class="fa-solid fa-plus text-yellow-400"></i> Añadir Sencillo
         </button>
 
-        <button onclick="openAddModal()" class="gold-btn px-4 py-2 rounded-full text-xs flex items-center gap-1.5">
+        <button type="button" onclick="openAddModal()" class="gold-btn px-4 py-2 rounded-full text-xs flex items-center gap-1.5 cursor-pointer">
           <i class="fa-solid fa-plus"></i> Añadir Álbum
         </button>
       </div>
@@ -240,12 +240,12 @@
   <!-- MODAL DE LOGIN / REGISTRO -->
   <div id="loginModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="modal-glass rounded-2xl max-w-sm w-full p-6 relative animate-modal">
-      <button onclick="toggleModal('loginModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-800/80 text-neutral-400 hover:text-white flex items-center justify-center transition">
+      <button type="button" onclick="toggleModal('loginModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-800/80 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer">
         <i class="fa-solid fa-xmark"></i>
       </button>
       <h3 class="text-xl font-bold text-white mb-4">Iniciar Sesión o Registrarse</h3>
       
-      <button onclick="loginWithGoogle()" class="w-full bg-white text-black hover:bg-neutral-200 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 mb-4 transition">
+      <button type="button" onclick="loginWithGoogle()" class="w-full bg-white text-black hover:bg-neutral-200 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 mb-4 transition cursor-pointer">
         <i class="fa-brands fa-google"></i> Continuar con Google
       </button>
 
@@ -265,8 +265,8 @@
           <input type="password" id="loginPassword" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="submit" class="flex-1 gold-btn py-2.5 rounded-xl text-sm">Entrar</button>
-          <button type="button" onclick="handleRegister(event)" class="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white py-2.5 rounded-xl text-sm font-bold border border-neutral-700 transition">Registrarse</button>
+          <button type="submit" class="flex-1 gold-btn py-2.5 rounded-xl text-sm cursor-pointer">Entrar</button>
+          <button type="button" onclick="handleRegister(event)" class="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white py-2.5 rounded-xl text-sm font-bold border border-neutral-700 transition cursor-pointer">Registrarse</button>
         </div>
       </form>
     </div>
@@ -282,7 +282,7 @@
   <!-- MODAL PARA AÑADIR / EDITAR ÁLBUM -->
   <div id="albumFormModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="modal-glass rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative animate-modal">
-      <button onclick="toggleModal('albumFormModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition">
+      <button type="button" onclick="toggleModal('albumFormModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer">
         <i class="fa-solid fa-xmark"></i>
       </button>
       <h3 id="formModalTitle" class="text-xl font-bold text-white mb-4">Añadir Nuevo Álbum</h3>
@@ -317,12 +317,12 @@
         <div>
           <div class="flex items-center justify-between mb-1">
             <label class="text-xs text-neutral-400">Canciones, Colaboraciones (ft.) y Puntuación (1-100)</label>
-            <button type="button" onclick="addTrackInput()" class="text-xs gold-text font-semibold hover:underline"><i class="fa-solid fa-plus"></i> Agregar Tema</button>
+            <button type="button" onclick="addTrackInput()" class="text-xs gold-text font-semibold hover:underline cursor-pointer"><i class="fa-solid fa-plus"></i> Agregar Tema</button>
           </div>
           <p class="text-[11px] text-neutral-500 mb-2">Para añadir varios artistas en <strong>ft.</strong>, escribe cada uno y presiona <kbd class="px-1.5 py-0.5 bg-neutral-800 rounded text-neutral-300">Enter</kbd> o toca <strong>+ Artista</strong>.</p>
           <div id="tracksInputContainer" class="space-y-2.5 max-h-60 overflow-y-auto pr-1"></div>
         </div>
-        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-sm mt-4">Guardar Álbum</button>
+        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-sm mt-4 cursor-pointer">Guardar Álbum</button>
       </form>
     </div>
   </div>
@@ -330,7 +330,7 @@
   <!-- MODAL PARA AÑADIR / EDITAR SENCILLO -->
   <div id="singleFormModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="modal-glass rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6 relative animate-modal">
-      <button onclick="toggleModal('singleFormModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition">
+      <button type="button" onclick="toggleModal('singleFormModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer">
         <i class="fa-solid fa-xmark"></i>
       </button>
       <h3 id="singleModalTitle" class="text-xl font-bold text-white mb-4">Rankear Sencillo</h3>
@@ -353,7 +353,7 @@
               <input type="text" id="singleFtInput" placeholder="Ej: Duki, Quevedo..." 
                      onkeydown="handleSingleFtKeydown(event)"
                      class="flex-1 bg-transparent text-xs text-white focus:outline-none">
-              <button type="button" onclick="addSingleFtTagFromInput()" class="px-2.5 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-yellow-400 text-xs font-bold">
+              <button type="button" onclick="addSingleFtTagFromInput()" class="px-2.5 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-yellow-400 text-xs font-bold cursor-pointer">
                 + Añadir
               </button>
             </div>
@@ -380,7 +380,7 @@
             <input type="url" id="singleCoverUrl" placeholder="O pega un enlace de imagen (http...)" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
           </div>
         </div>
-        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-sm mt-2">Guardar Sencillo</button>
+        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-sm mt-2 cursor-pointer">Guardar Sencillo</button>
       </form>
     </div>
   </div>
@@ -388,7 +388,7 @@
   <!-- MODAL GUÍA DE PUNTUACIONES -->
   <div id="legendModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="modal-glass rounded-3xl max-w-md w-full p-6 relative animate-modal">
-      <button onclick="toggleModal('legendModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition">
+      <button type="button" onclick="toggleModal('legendModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer">
         <i class="fa-solid fa-xmark"></i>
       </button>
       <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
@@ -396,10 +396,10 @@
       </h3>
 
       <div class="flex border-b border-neutral-800 mb-4">
-        <button id="guideTabAlbums" onclick="switchGuideTab('albums')" class="flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400">
+        <button id="guideTabAlbums" type="button" onclick="switchGuideTab('albums')" class="flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400 cursor-pointer">
           Álbumes
         </button>
-        <button id="guideTabTracks" onclick="switchGuideTab('tracks')" class="flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white">
+        <button id="guideTabTracks" type="button" onclick="switchGuideTab('tracks')" class="flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white cursor-pointer">
           Canciones / Sencillos
         </button>
       </div>
@@ -414,7 +414,7 @@
     <span id="toastMessage">Acción completada</span>
   </div>
 
-  <!-- SDKs DE FIREBASE -->
+  <!-- SCRIPT UNIFICADO (INTERFAZ + FIREBASE) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
@@ -425,20 +425,7 @@
       signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDNG0QICIscO7dpKVgr_mgoBgXOVnR-lOU",
-      authDomain: "ranking-blastico-698d8.firebaseapp.com",
-      databaseURL: "https://ranking-blastico-698d8-default-rtdb.firebaseio.com",
-      projectId: "ranking-blastico-698d8",
-      storageBucket: "ranking-blastico-698d8.appspot.com",
-      messagingSenderId: "650938268028",
-      appId: "1:650938268028:web:d175c147ce0c748d31ccf9"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const auth = getAuth(app);
-    const googleProvider = new GoogleAuthProvider();
+    const DEFAULT_COVER = "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=600&q=80";
 
     window.currentUser = null;
     window.isReadOnly = false;
@@ -447,216 +434,97 @@
     window.singles = [];
     window.currentView = 'albums';
     window.selectedGenre = 'Todos';
+    window.currentSingleFtList = [];
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const sharedUser = urlParams.get('user');
+    // --- FUNCIONES DE INTERFAZ Y UTILIDADES (DISPONIBLES DESDE EL INICIO) ---
+    window.toggleModal = function(modalId) {
+      const el = document.getElementById(modalId);
+      if (el) el.classList.toggle('hidden');
+    };
 
-    onAuthStateChanged(auth, (user) => {
-      window.currentUser = user;
-      const authBtn = document.getElementById('authBtn');
-      const userActionsBar = document.getElementById('userActionsBar');
-      const shareBtn = document.getElementById('shareBtn');
-      const banner = document.getElementById('viewModeBanner');
+    window.showToast = function(msg) {
+      const toast = document.getElementById('toastNotification');
+      const txt = document.getElementById('toastMessage');
+      if (!toast || !txt) return;
+      txt.innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 4000);
+    };
 
-      if (sharedUser) {
-        window.isReadOnly = true;
-        window.targetUid = sharedUser;
-        authBtn.innerHTML = user ? `<i class="fa-solid fa-right-from-bracket"></i> Salir` : `<i class="fa-solid fa-lock"></i> Iniciar Sesión`;
-        userActionsBar.classList.add('hidden');
-        shareBtn.classList.add('hidden');
-        banner.classList.remove('hidden');
-        document.getElementById('headerSubtitle').innerText = "Perfil de Tercero (Modo Lectura)";
-      } else if (user) {
-        window.isReadOnly = false;
-        window.targetUid = user.uid;
-        authBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> Salir`;
-        userActionsBar.classList.remove('hidden');
-        shareBtn.classList.remove('hidden');
-        shareBtn.classList.add('flex');
-        banner.classList.add('hidden');
-        document.getElementById('headerSubtitle').innerText = `Mi Catálogo (${user.email || user.displayName})`;
-        checkCopiedAlbum();
-      } else {
-        window.isReadOnly = true;
-        window.targetUid = null;
-        authBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Iniciar Sesión / Registrarse`;
-        userActionsBar.classList.add('hidden');
-        shareBtn.classList.add('hidden');
-        banner.classList.add('hidden');
-        document.getElementById('headerSubtitle').innerText = "Inicia sesión para gestionar tu ranking";
-      }
-
-      loadUserData();
-    });
-
-    function loadUserData() {
-      if (!window.targetUid) {
-        window.albums = [];
-        window.singles = [];
-        renderApp();
-        return;
-      }
-
-      const userAlbumsRef = ref(db, `users/${window.targetUid}/albums`);
-      onValue(userAlbumsRef, (snapshot) => {
-        const data = snapshot.val();
-        window.albums = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
-        renderApp();
+    window.switchView = function(view) {
+      window.currentView = view;
+      const views = ['albums', 'singles', 'artists'];
+      views.forEach(v => {
+        const btn = document.getElementById(`view${v.charAt(0).toUpperCase() + v.slice(1)}Btn`);
+        if (!btn) return;
+        if (v === view) {
+          btn.className = "px-3.5 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 border border-yellow-500/50 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer";
+        } else {
+          btn.className = "px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer";
+        }
       });
 
-      const userSinglesRef = ref(db, `users/${window.targetUid}/singles`);
-      onValue(userSinglesRef, (snapshot) => {
-        const data = snapshot.val();
-        window.singles = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
-        renderApp();
-      });
-    }
+      document.getElementById('albumsGrid').classList.toggle('hidden', view !== 'albums');
+      document.getElementById('singlesList').classList.toggle('hidden', view !== 'singles');
+      document.getElementById('artistsList').classList.toggle('hidden', view !== 'artists');
+      window.renderApp();
+    };
 
-    // COPIAR ÁLBUM DE TERCERO A MI RANKING
-    window.copyAlbumToClipboard = async (albumId) => {
-      const album = window.albums.find(a => a.id === albumId);
-      if (!album) return;
-      const { id, ...cleanAlbum } = album;
+    window.setGenreFilter = function(genre) {
+      window.selectedGenre = genre;
+      window.renderApp();
+    };
 
-      // Si el usuario ya está logueado, lo guarda directamente en su cuenta de Firebase
-      if (window.currentUser) {
-        try {
-          const myAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
-          await set(push(myAlbumsRef), cleanAlbum);
-          showToast(`¡"${album.title}" guardado en tu cuenta! Tocá "Ir a mi cuenta" para editar las notas.`);
-        } catch (err) {
-          localStorage.setItem('rb_copied_album', JSON.stringify(cleanAlbum));
-          showToast(`"${album.title}" copiado. Ve a tu cuenta para pegarlo.`);
-        }
+    window.switchGuideTab = function(tab) {
+      const list = document.getElementById('legendList');
+      const tabA = document.getElementById('guideTabAlbums');
+      const tabT = document.getElementById('guideTabTracks');
+      if (!list) return;
+
+      const renderRows = (items) => items.map(r => `
+        <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-between">
+          <span class="text-neutral-300 font-semibold">${r.range}</span>
+          <span class="px-3 py-0.5 rounded-full text-xs font-bold shadow-sm" style="background:${r.bg}; color:${r.text};">${r.label}</span>
+        </div>
+      `).join('');
+
+      if (tab === 'albums') {
+        tabA.className = "flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400 cursor-pointer";
+        tabT.className = "flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white cursor-pointer";
+        const albumRanges = [
+          { range: "100", label: "BLASTICO", bg: "#7c4dff", text: "#fff" },
+          { range: "94 a 99", label: "JOYITA", bg: "#9c27b0", text: "#fff" },
+          { range: "86 a 93", label: "ES UNA BANDAA", bg: "#2e7d32", text: "#fff" },
+          { range: "82 a 85", label: "Primee", bg: "#43a047", text: "#fff" },
+          { range: "78 a 81", label: "Lindaaaa", bg: "#66bb6a", text: "#0a0a0a" },
+          { range: "70 a 77", label: "me gusta", bg: "#4caf50", text: "#0a0a0a" },
+          { range: "65 a 69", label: "Esta bien", bg: "#cddc39", text: "#0a0a0a" },
+          { range: "60 a 64", label: "Cumple", bg: "#fbc02d", text: "#0a0a0a" },
+          { range: "51 a 59", label: "Normal", bg: "#ff9800", text: "#0a0a0a" },
+          { range: "41 a 50", label: "No me gusta", bg: "#f57c00", text: "#fff" },
+          { range: "1 a 40", label: "Inescuchable", bg: "#d32f2f", text: "#fff" }
+        ];
+        list.innerHTML = renderRows(albumRanges);
       } else {
-        localStorage.setItem('rb_copied_album', JSON.stringify(cleanAlbum));
-        showToast(`"${album.title}" copiado. Inicia sesión en tu cuenta para pegarlo y editarlo.`);
+        tabT.className = "flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400 cursor-pointer";
+        tabA.className = "flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white cursor-pointer";
+        const trackRanges = [
+          { range: "100", label: "Ponedor", bg: "#7c4dff", text: "#fff" },
+          { range: "94 a 99", label: "JOYITA", bg: "#9c27b0", text: "#fff" },
+          { range: "86 a 93", label: "ES UNA BANDAA", bg: "#2e7d32", text: "#fff" },
+          { range: "82 a 85", label: "Primee", bg: "#43a047", text: "#fff" },
+          { range: "78 a 81", label: "Lindaaaa", bg: "#66bb6a", text: "#0a0a0a" },
+          { range: "70 a 77", label: "me gusta", bg: "#4caf50", text: "#0a0a0a" },
+          { range: "69", label: "no es mi estilo", bg: "#8d6e63", text: "#fff" },
+          { range: "65 a 68", label: "Esta bien", bg: "#cddc39", text: "#0a0a0a" },
+          { range: "60 a 64", label: "Cumple", bg: "#fbc02d", text: "#0a0a0a" },
+          { range: "51 a 59", label: "Ignorable", bg: "#ff9800", text: "#0a0a0a" },
+          { range: "41 a 50", label: "No me gusta", bg: "#f57c00", text: "#fff" },
+          { range: "1 a 40", label: "Inescuchable", bg: "#d32f2f", text: "#fff" }
+        ];
+        list.innerHTML = renderRows(trackRanges);
       }
     };
-
-    window.checkCopiedAlbum = () => {
-      const raw = localStorage.getItem('rb_copied_album');
-      const btn = document.getElementById('pasteAlbumBtn');
-      const badge = document.getElementById('copiedAlbumNameBadge');
-      if (raw && !window.isReadOnly && window.currentUser) {
-        try {
-          const parsed = JSON.parse(raw);
-          badge.innerText = parsed.title;
-          btn.classList.remove('hidden');
-        } catch (e) {
-          btn.classList.add('hidden');
-        }
-      } else {
-        btn.classList.add('hidden');
-      }
-    };
-
-    window.pasteCopiedAlbum = async () => {
-      if (window.isReadOnly || !window.currentUser) return;
-      const raw = localStorage.getItem('rb_copied_album');
-      if (!raw) return;
-      try {
-        const albumData = JSON.parse(raw);
-        await saveAlbumToFirebase(albumData, null);
-        localStorage.removeItem('rb_copied_album');
-        checkCopiedAlbum();
-        showToast(`¡Álbum "${albumData.title}" agregado a tu catálogo!`);
-      } catch (err) {
-        alert("Error al pegar el álbum: " + err.message);
-      }
-    };
-
-    window.saveAlbumToFirebase = async (albumData, id) => {
-      if (window.isReadOnly || !window.currentUser) {
-        alert("No tienes permisos para modificar este catálogo.");
-        return;
-      }
-      const userAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
-      if (id) {
-        await update(ref(db, `users/${window.currentUser.uid}/albums/${id}`), albumData);
-      } else {
-        await set(push(userAlbumsRef), albumData);
-      }
-    };
-
-    window.deleteAlbumFromFirebase = async (id) => {
-      if (window.isReadOnly || !window.currentUser) return;
-      if (confirm("¿Seguro que quieres eliminar este álbum?")) {
-        await remove(ref(db, `users/${window.currentUser.uid}/albums/${id}`));
-        toggleModal('detailModal');
-        showToast("Álbum eliminado");
-      }
-    };
-
-    window.saveSingleToFirebase = async (singleData, id) => {
-      if (window.isReadOnly || !window.currentUser) return;
-      const userSinglesRef = ref(db, `users/${window.currentUser.uid}/singles`);
-      if (id) {
-        await update(ref(db, `users/${window.currentUser.uid}/singles/${id}`), singleData);
-      } else {
-        await set(push(userSinglesRef), singleData);
-      }
-    };
-
-    window.deleteSingleFromFirebase = async (id) => {
-      if (window.isReadOnly || !window.currentUser) return;
-      if (confirm("¿Eliminar este sencillo?")) {
-        await remove(ref(db, `users/${window.currentUser.uid}/singles/${id}`));
-        showToast("Sencillo eliminado");
-      }
-    };
-
-    window.shareProfile = () => {
-      if (!window.currentUser) return;
-      const profileUrl = `${window.location.origin}${window.location.pathname}?user=${window.currentUser.uid}`;
-      navigator.clipboard.writeText(profileUrl);
-      showToast("Enlace de perfil público copiado al portapapeles");
-    };
-
-    window.loginWithGoogle = async () => {
-      try {
-        await signInWithPopup(auth, googleProvider);
-        toggleModal('loginModal');
-      } catch (err) {
-        alert("Error al iniciar con Google: " + err.message);
-      }
-    };
-
-    window.handleLogin = async (e) => {
-      e.preventDefault();
-      try {
-        await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
-        toggleModal('loginModal');
-      } catch (err) {
-        alert("Error al iniciar sesión: " + err.message);
-      }
-    };
-
-    window.handleRegister = async (e) => {
-      e.preventDefault();
-      try {
-        await createUserWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
-        showToast("¡Cuenta creada con éxito!");
-        toggleModal('loginModal');
-      } catch (err) {
-        alert("Error al registrarse: " + err.message);
-      }
-    };
-
-    window.toggleAuth = () => {
-      if (window.currentUser) {
-        signOut(auth).then(() => {
-          window.location.href = window.location.pathname;
-        });
-      } else {
-        toggleModal('loginModal');
-      }
-    };
-  </script>
-
-  <!-- LÓGICA DE INTERFAZ, CÁLCULOS Y RENDERIZADO -->
-  <script>
-    const DEFAULT_COVER = "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=600&q=80";
 
     function parseFtArtists(ftValue) {
       if (!ftValue) return [];
@@ -675,7 +543,6 @@
       return t.name || t.title || t.song || "Tema sin nombre";
     }
 
-    // ESCALA DE CALIFICACIÓN DE CANCIONES / SENCILLOS
     function getTrackRatingInfo(score) {
       const s = Number(score);
       if (s === 100) return { label: "Ponedor", bg: "#7c4dff", text: "#ffffff" };
@@ -692,7 +559,6 @@
       return { label: "Inescuchable", bg: "#d32f2f", text: "#ffffff" };
     }
 
-    // ESCALA DE CALIFICACIÓN DE ÁLBUMES (SOLO "BLASTICO" EN 100)
     function getAlbumRatingInfo(avg) {
       const s = Number(avg);
       if (s === 100) return { label: "BLASTICO", bg: "#7c4dff", text: "#ffffff" };
@@ -718,7 +584,6 @@
       return Number(num || 0).toFixed(2);
     }
 
-    // ESCUDO DORADO HERÁLDICO CON LAURELES (ESTÉTICA CAPTURA 4)
     function renderGoldenShield(score, label) {
       return `
         <div class="relative flex flex-col items-center justify-center my-3 select-none" style="animation: badgePulse 0.4s ease;">
@@ -742,7 +607,6 @@
               </linearGradient>
             </defs>
 
-            <!-- Rama de Laureles Izquierda -->
             <g fill="url(#goldLaurel)">
               <path d="M56 122 C42 105, 36 80, 44 50" fill="none" stroke="url(#goldLaurel)" stroke-width="2.2" stroke-linecap="round"/>
               <ellipse cx="45" cy="49" rx="8" ry="3.5" transform="rotate(-55 45 49)"/>
@@ -758,7 +622,6 @@
               <ellipse cx="67" cy="130" rx="8.5" ry="3.5" transform="rotate(42 67 130)"/>
             </g>
 
-            <!-- Rama de Laureles Derecha -->
             <g fill="url(#goldLaurel)">
               <path d="M184 122 C198 105, 204 80, 196 50" fill="none" stroke="url(#goldLaurel)" stroke-width="2.2" stroke-linecap="round"/>
               <ellipse cx="195" cy="49" rx="8" ry="3.5" transform="rotate(55 195 49)"/>
@@ -774,16 +637,13 @@
               <ellipse cx="173" cy="130" rx="8.5" ry="3.5" transform="rotate(-42 173 130)"/>
             </g>
 
-            <!-- Forma del Escudo Heráldico -->
             <path d="M120 12 L178 34 L178 86 C178 122 120 148 120 148 C120 148 62 122 62 86 L62 34 Z" 
                   fill="url(#shieldInterior)" stroke="url(#goldShieldBorder)" stroke-width="6.5" stroke-linejoin="round"/>
             
-            <!-- Filete Interior Dorado Fino -->
             <path d="M120 20 L170 39 L170 85 C170 115 120 138 120 138 C120 138 70 115 70 85 L70 39 Z" 
                   fill="none" stroke="url(#goldShieldBorder)" stroke-width="1.2" opacity="0.7"/>
           </svg>
 
-          <!-- Texto Interno del Escudo -->
           <div class="absolute inset-0 flex flex-col items-center justify-center pt-1 px-4 text-center">
             <span class="text-3xl font-black text-white tracking-tight leading-none drop-shadow">${formatScore(score)}</span>
             <span class="text-[10px] font-extrabold tracking-wider uppercase mt-1.5 text-[#E8C86B] leading-tight">${label}</span>
@@ -792,25 +652,7 @@
       `;
     }
 
-    function switchView(view) {
-      window.currentView = view;
-      const views = ['albums', 'singles', 'artists'];
-      views.forEach(v => {
-        const btn = document.getElementById(`view${v.charAt(0).toUpperCase() + v.slice(1)}Btn`);
-        if (v === view) {
-          btn.className = "px-3.5 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 border border-yellow-500/50 text-xs font-bold transition flex items-center gap-1.5";
-        } else {
-          btn.className = "px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5";
-        }
-      });
-
-      document.getElementById('albumsGrid').classList.toggle('hidden', view !== 'albums');
-      document.getElementById('singlesList').classList.toggle('hidden', view !== 'singles');
-      document.getElementById('artistsList').classList.toggle('hidden', view !== 'artists');
-      renderApp();
-    }
-
-    function renderApp() {
+    window.renderApp = function() {
       const albums = window.albums || [];
       const singles = window.singles || [];
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -842,8 +684,8 @@
       filtersEl.innerHTML = allGenres.map(g => {
         const active = window.selectedGenre === g;
         return `
-          <button onclick="setGenreFilter('${g}')" 
-                  class="px-3.5 py-1 rounded-full text-xs font-semibold transition ${
+          <button type="button" onclick="setGenreFilter('${g}')" 
+                  class="px-3.5 py-1 rounded-full text-xs font-semibold transition cursor-pointer ${
                     active 
                       ? 'bg-yellow-500/15 text-yellow-300 border border-yellow-500/60' 
                       : 'bg-neutral-900 text-neutral-400 border border-neutral-800 hover:border-neutral-600'
@@ -860,12 +702,7 @@
       } else if (window.currentView === 'artists') {
         renderArtistsList(enrichedAlbums, singles, query, sortBy);
       }
-    }
-
-    function setGenreFilter(genre) {
-      window.selectedGenre = genre;
-      renderApp();
-    }
+    };
 
     function renderAlbumsGrid(albums, query, sortBy) {
       const grid = document.getElementById('albumsGrid');
@@ -964,8 +801,8 @@
                 ${formatScore(s.score)} (${rating.label})
               </span>
               ${!window.isReadOnly ? `
-                <button onclick="openSingleModal('${s.id}')" class="text-neutral-400 hover:text-white p-1.5"><i class="fa-solid fa-pen text-xs"></i></button>
-                <button onclick="deleteSingleFromFirebase('${s.id}')" class="text-neutral-400 hover:text-red-400 p-1.5"><i class="fa-solid fa-trash text-xs"></i></button>
+                <button type="button" onclick="openSingleModal('${s.id}')" class="text-neutral-400 hover:text-white p-1.5 cursor-pointer"><i class="fa-solid fa-pen text-xs"></i></button>
+                <button type="button" onclick="deleteSingleFromFirebase('${s.id}')" class="text-neutral-400 hover:text-red-400 p-1.5 cursor-pointer"><i class="fa-solid fa-trash text-xs"></i></button>
               ` : ''}
             </div>
           </div>
@@ -973,7 +810,6 @@
       }).join('');
     }
 
-    // PROMEDIO DE ARTISTAS INCLUYENDO ARTISTA PRINCIPAL Y TODOS LOS FT.
     function renderArtistsList(albums, singles, query, sortBy) {
       const container = document.getElementById('artistsList');
       const artistMap = {};
@@ -1054,7 +890,7 @@
       `).join('');
     }
 
-    function openAlbumDetail(albumId) {
+    window.openAlbumDetail = function(albumId) {
       const album = window.albums.find(a => a.id === albumId);
       if (!album) return;
 
@@ -1085,15 +921,15 @@
           <div class="flex items-center gap-6">
             ${!window.isReadOnly ? `
               <div class="flex items-center gap-2.5">
-                <button onclick="openEditModal('${album.id}')" class="px-3.5 py-1.5 rounded-full bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-xs font-semibold text-white flex items-center gap-1.5 transition">
+                <button type="button" onclick="openEditModal('${album.id}')" class="px-3.5 py-1.5 rounded-full bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-xs font-semibold text-white flex items-center gap-1.5 transition cursor-pointer">
                   <i class="fa-solid fa-pen text-yellow-400"></i> Editar Álbum
                 </button>
-                <button onclick="deleteAlbumFromFirebase('${album.id}')" class="w-8 h-8 rounded-full bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 flex items-center justify-center transition" title="Eliminar álbum">
+                <button type="button" onclick="deleteAlbumFromFirebase('${album.id}')" class="w-8 h-8 rounded-full bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 flex items-center justify-center transition cursor-pointer" title="Eliminar álbum">
                   <i class="fa-solid fa-trash text-xs"></i>
                 </button>
               </div>
             ` : ''}
-            <button onclick="toggleModal('detailModal')" class="w-9 h-9 rounded-full bg-neutral-800/90 hover:bg-neutral-700 text-neutral-300 hover:text-white flex items-center justify-center transition ml-2" title="Cerrar">
+            <button type="button" onclick="toggleModal('detailModal')" class="w-9 h-9 rounded-full bg-neutral-800/90 hover:bg-neutral-700 text-neutral-300 hover:text-white flex items-center justify-center transition ml-2 cursor-pointer" title="Cerrar">
               <i class="fa-solid fa-xmark text-base"></i>
             </button>
           </div>
@@ -1107,8 +943,8 @@
             ${renderGoldenShield(avg, albumRating.label)}
 
             ${window.isReadOnly ? `
-              <button onclick="copyAlbumToClipboard('${album.id}')" 
-                      class="gold-btn w-full py-2.5 px-3 rounded-xl text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 mt-1">
+              <button type="button" onclick="copyAlbumToClipboard('${album.id}')" 
+                      class="gold-btn w-full py-2.5 px-3 rounded-xl text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 mt-1 cursor-pointer">
                 <i class="fa-solid fa-copy"></i> Copiar álbum a mi ranking
               </button>
             ` : ''}
@@ -1131,17 +967,17 @@
         </div>
       `;
 
-      toggleModal('detailModal');
-    }
+      window.toggleModal('detailModal');
+    };
 
-    // CHIPS DE MÚLTIPLES ARTISTAS FT. EN CANCIONES DE ÁLBUM
+    // CHIPS DE MÚLTIPLES ARTISTAS FT.
     function renderFtChipsInsideRow(rowElement, artistsArray) {
       const chipsContainer = rowElement.querySelector('.ft-chips-container');
       rowElement.dataset.ftList = JSON.stringify(artistsArray);
       chipsContainer.innerHTML = artistsArray.map((artist, i) => `
         <span class="inline-flex items-center gap-1 bg-yellow-500/15 border border-yellow-500/40 text-yellow-200 text-[10px] font-semibold px-2 py-0.5 rounded-full">
           ${artist}
-          <button type="button" onclick="removeTrackFtChip(this, ${i})" class="hover:text-white ml-0.5">&times;</button>
+          <button type="button" onclick="removeTrackFtChip(this, ${i})" class="hover:text-white ml-0.5 cursor-pointer">&times;</button>
         </span>
       `).join('');
     }
@@ -1157,14 +993,14 @@
       renderFtChipsInsideRow(rowElement, current);
     }
 
-    function removeTrackFtChip(btnElement, index) {
+    window.removeTrackFtChip = function(btnElement, index) {
       const row = btnElement.closest('.track-form-row');
       const current = JSON.parse(row.dataset.ftList || '[]');
       current.splice(index, 1);
       renderFtChipsInsideRow(row, current);
-    }
+    };
 
-    function handleTrackFtKeydown(e, inputEl) {
+    window.handleTrackFtKeydown = function(e, inputEl) {
       if (e.key === 'Enter' || e.key === ',') {
         e.preventDefault();
         const val = inputEl.value.trim();
@@ -1173,9 +1009,9 @@
           inputEl.value = '';
         }
       }
-    }
+    };
 
-    function addTrackFtFromBtn(btnEl) {
+    window.addTrackFtFromBtn = function(btnEl) {
       const row = btnEl.closest('.track-form-row');
       const inputEl = row.querySelector('.track-ft-input');
       const val = inputEl.value.trim();
@@ -1183,23 +1019,22 @@
         addTrackFtChip(row, val);
         inputEl.value = '';
       }
-    }
+    };
 
-    // FORMULARIO DE ÁLBUMES
-    function openAddModal() {
+    window.openAddModal = function() {
       document.getElementById('formModalTitle').innerText = "Añadir Nuevo Álbum";
       document.getElementById('editAlbumId').value = "";
       document.getElementById('albumForm').reset();
       document.getElementById('tracksInputContainer').innerHTML = "";
-      addTrackInput();
-      addTrackInput();
-      toggleModal('albumFormModal');
-    }
+      window.addTrackInput();
+      window.addTrackInput();
+      window.toggleModal('albumFormModal');
+    };
 
-    function openEditModal(albumId) {
+    window.openEditModal = function(albumId) {
       const album = window.albums.find(a => a.id === albumId);
       if (!album) return;
-      toggleModal('detailModal');
+      window.toggleModal('detailModal');
 
       document.getElementById('formModalTitle').innerText = "Editar Álbum";
       document.getElementById('editAlbumId').value = album.id;
@@ -1211,11 +1046,11 @@
 
       const container = document.getElementById('tracksInputContainer');
       container.innerHTML = "";
-      (album.tracks || []).forEach(t => addTrackInput(getTrackName(t), t.ft || [], t.score));
-      toggleModal('albumFormModal');
-    }
+      (album.tracks || []).forEach(t => window.addTrackInput(getTrackName(t), t.ft || [], t.score));
+      window.toggleModal('albumFormModal');
+    };
 
-    function addTrackInput(name = "", ft = [], score = "") {
+    window.addTrackInput = function(name = "", ft = [], score = "") {
       const container = document.getElementById('tracksInputContainer');
       const div = document.createElement('div');
       div.className = "track-form-row bg-neutral-900/70 border border-neutral-800 rounded-2xl p-2.5 space-y-2";
@@ -1227,7 +1062,7 @@
                  class="track-name flex-1 bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-1.5 text-xs text-white focus:border-yellow-500 focus:outline-none">
           <input type="number" placeholder="Pts" min="1" max="100" step="0.01" value="${score}" required 
                  class="track-score w-16 bg-neutral-950 border border-neutral-700 rounded-xl px-2 py-1.5 text-xs text-white text-center font-bold focus:border-yellow-500 focus:outline-none">
-          <button type="button" onclick="this.closest('.track-form-row').remove()" class="text-neutral-500 hover:text-red-400 px-1.5" title="Quitar canción">
+          <button type="button" onclick="this.closest('.track-form-row').remove()" class="text-neutral-500 hover:text-red-400 px-1.5 cursor-pointer" title="Quitar canción">
             <i class="fa-solid fa-trash text-xs"></i>
           </button>
         </div>
@@ -1238,7 +1073,7 @@
             <input type="text" placeholder="Añadir artista invitado..." 
                    onkeydown="handleTrackFtKeydown(event, this)"
                    class="track-ft-input flex-1 bg-neutral-950 border border-neutral-800 rounded-lg px-2 py-1 text-[11px] text-neutral-200 focus:border-yellow-500 focus:outline-none">
-            <button type="button" onclick="addTrackFtFromBtn(this)" class="px-2 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-yellow-400 text-[10px] font-bold">
+            <button type="button" onclick="addTrackFtFromBtn(this)" class="px-2 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-yellow-400 text-[10px] font-bold cursor-pointer">
               + Artista
             </button>
           </div>
@@ -1250,9 +1085,9 @@
       if (initialFts.length > 0) {
         renderFtChipsInsideRow(div, initialFts);
       }
-    }
+    };
 
-    async function saveAlbum(e) {
+    window.saveAlbum = async function(e) {
       e.preventDefault();
       const id = document.getElementById('editAlbumId').value;
       const trackRows = document.querySelectorAll('#tracksInputContainer > .track-form-row');
@@ -1282,24 +1117,21 @@
       };
 
       await window.saveAlbumToFirebase(albumData, id || null);
-      toggleModal('albumFormModal');
-      showToast(id ? "Álbum actualizado" : "Álbum guardado");
-    }
-
-    // CHIPS DE MÚLTIPLES ARTISTAS FT. EN SENCILLOS
-    window.currentSingleFtList = [];
+      window.toggleModal('albumFormModal');
+      window.showToast(id ? "Álbum actualizado" : "Álbum guardado");
+    };
 
     function renderSingleFtTags() {
       const container = document.getElementById('singleFtTags');
       container.innerHTML = window.currentSingleFtList.map((artist, i) => `
         <span class="inline-flex items-center gap-1 bg-yellow-500/15 border border-yellow-500/40 text-yellow-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">
           ${artist}
-          <button type="button" onclick="removeSingleFtTag(${i})" class="hover:text-white ml-1">&times;</button>
+          <button type="button" onclick="removeSingleFtTag(${i})" class="hover:text-white ml-1 cursor-pointer">&times;</button>
         </span>
       `).join('');
     }
 
-    function addSingleFtTagFromInput() {
+    window.addSingleFtTagFromInput = function() {
       const input = document.getElementById('singleFtInput');
       const incoming = parseFtArtists(input.value);
       incoming.forEach(name => {
@@ -1309,21 +1141,21 @@
       });
       input.value = '';
       renderSingleFtTags();
-    }
+    };
 
-    function removeSingleFtTag(index) {
+    window.removeSingleFtTag = function(index) {
       window.currentSingleFtList.splice(index, 1);
       renderSingleFtTags();
-    }
+    };
 
-    function handleSingleFtKeydown(e) {
+    window.handleSingleFtKeydown = function(e) {
       if (e.key === 'Enter' || e.key === ',') {
         e.preventDefault();
-        addSingleFtTagFromInput();
+        window.addSingleFtTagFromInput();
       }
-    }
+    };
 
-    function openSingleModal(singleId = null) {
+    window.openSingleModal = function(singleId = null) {
       document.getElementById('singleForm').reset();
       document.getElementById('editSingleId').value = "";
       document.getElementById('singleModalTitle').innerText = "Rankear Sencillo";
@@ -1344,13 +1176,13 @@
         }
       }
       renderSingleFtTags();
-      toggleModal('singleFormModal');
-    }
+      window.toggleModal('singleFormModal');
+    };
 
-    async function saveSingle(e) {
+    window.saveSingle = async function(e) {
       e.preventDefault();
       if (document.getElementById('singleFtInput').value.trim()) {
-        addSingleFtTagFromInput();
+        window.addSingleFtTagFromInput();
       }
       const id = document.getElementById('editSingleId').value;
       const singleData = {
@@ -1364,12 +1196,11 @@
       };
 
       await window.saveSingleToFirebase(singleData, id || null);
-      toggleModal('singleFormModal');
-      showToast(id ? "Sencillo actualizado" : "Sencillo guardado");
-    }
+      window.toggleModal('singleFormModal');
+      window.showToast(id ? "Sencillo actualizado" : "Sencillo guardado");
+    };
 
-    // UTILIDADES
-    function handleFileSelect(event, targetInputId) {
+    window.handleFileSelect = function(event, targetInputId) {
       const file = event.target.files[0];
       if (!file) return;
       const reader = new FileReader();
@@ -1377,23 +1208,235 @@
         document.getElementById(targetInputId).value = e.target.result;
       };
       reader.readAsDataURL(file);
+    };
+
+    // Inicializar guía y vista base de inmediato
+    window.switchGuideTab('albums');
+    window.renderApp();
+
+    // --- CONEXIÓN CON FIREBASE ---
+    try {
+      const firebaseConfig = {
+        apiKey: "AIzaSyDNG0QICIscO7dpKVgr_mgoBgXOVnR-lOU",
+        authDomain: "ranking-blastico-698d8.firebaseapp.com",
+        databaseURL: "https://ranking-blastico-698d8-default-rtdb.firebaseio.com",
+        projectId: "ranking-blastico-698d8",
+        storageBucket: "ranking-blastico-698d8.appspot.com",
+        messagingSenderId: "650938268028",
+        appId: "1:650938268028:web:d175c147ce0c748d31ccf9"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const auth = getAuth(app);
+      const googleProvider = new GoogleAuthProvider();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const sharedUser = urlParams.get('user');
+
+      onAuthStateChanged(auth, (user) => {
+        window.currentUser = user;
+        const authBtn = document.getElementById('authBtn');
+        const userActionsBar = document.getElementById('userActionsBar');
+        const shareBtn = document.getElementById('shareBtn');
+        const banner = document.getElementById('viewModeBanner');
+
+        if (sharedUser) {
+          window.isReadOnly = true;
+          window.targetUid = sharedUser;
+          authBtn.innerHTML = user ? `<i class="fa-solid fa-right-from-bracket"></i> Salir` : `<i class="fa-solid fa-lock"></i> Iniciar Sesión`;
+          userActionsBar.classList.add('hidden');
+          shareBtn.classList.add('hidden');
+          banner.classList.remove('hidden');
+          document.getElementById('headerSubtitle').innerText = "Perfil de Tercero (Modo Lectura)";
+        } else if (user) {
+          window.isReadOnly = false;
+          window.targetUid = user.uid;
+          authBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> Salir`;
+          userActionsBar.classList.remove('hidden');
+          shareBtn.classList.remove('hidden');
+          shareBtn.classList.add('flex');
+          banner.classList.add('hidden');
+          document.getElementById('headerSubtitle').innerText = `Mi Catálogo (${user.email || user.displayName})`;
+          window.checkCopiedAlbum();
+        } else {
+          window.isReadOnly = true;
+          window.targetUid = null;
+          authBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Iniciar Sesión / Registrarse`;
+          userActionsBar.classList.add('hidden');
+          shareBtn.classList.add('hidden');
+          banner.classList.add('hidden');
+          document.getElementById('headerSubtitle').innerText = "Inicia sesión para gestionar tu ranking";
+        }
+
+        loadUserData();
+      });
+
+      function loadUserData() {
+        if (!window.targetUid) {
+          window.albums = [];
+          window.singles = [];
+          window.renderApp();
+          return;
+        }
+
+        const userAlbumsRef = ref(db, `users/${window.targetUid}/albums`);
+        onValue(userAlbumsRef, (snapshot) => {
+          const data = snapshot.val();
+          window.albums = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+          window.renderApp();
+        });
+
+        const userSinglesRef = ref(db, `users/${window.targetUid}/singles`);
+        onValue(userSinglesRef, (snapshot) => {
+          const data = snapshot.val();
+          window.singles = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+          window.renderApp();
+        });
+      }
+
+      window.copyAlbumToClipboard = async (albumId) => {
+        const album = window.albums.find(a => a.id === albumId);
+        if (!album) return;
+        const { id, ...cleanAlbum } = album;
+
+        if (window.currentUser) {
+          try {
+            const myAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
+            await set(push(myAlbumsRef), cleanAlbum);
+            window.showToast(`¡"${album.title}" guardado en tu cuenta! Tocá "Ir a mi cuenta" para editar las notas.`);
+          } catch (err) {
+            localStorage.setItem('rb_copied_album', JSON.stringify(cleanAlbum));
+            window.showToast(`"${album.title}" copiado. Ve a tu cuenta para pegarlo.`);
+          }
+        } else {
+          localStorage.setItem('rb_copied_album', JSON.stringify(cleanAlbum));
+          window.showToast(`"${album.title}" copiado. Inicia sesión en tu cuenta para pegarlo y editarlo.`);
+        }
+      };
+
+      window.checkCopiedAlbum = () => {
+        const raw = localStorage.getItem('rb_copied_album');
+        const btn = document.getElementById('pasteAlbumBtn');
+        const badge = document.getElementById('copiedAlbumNameBadge');
+        if (raw && !window.isReadOnly && window.currentUser) {
+          try {
+            const parsed = JSON.parse(raw);
+            badge.innerText = parsed.title;
+            btn.classList.remove('hidden');
+          } catch (e) {
+            btn.classList.add('hidden');
+          }
+        } else {
+          btn.classList.add('hidden');
+        }
+      };
+
+      window.pasteCopiedAlbum = async () => {
+        if (window.isReadOnly || !window.currentUser) return;
+        const raw = localStorage.getItem('rb_copied_album');
+        if (!raw) return;
+        try {
+          const albumData = JSON.parse(raw);
+          await window.saveAlbumToFirebase(albumData, null);
+          localStorage.removeItem('rb_copied_album');
+          window.checkCopiedAlbum();
+          window.showToast(`¡Álbum "${albumData.title}" agregado a tu catálogo!`);
+        } catch (err) {
+          alert("Error al pegar el álbum: " + err.message);
+        }
+      };
+
+      window.saveAlbumToFirebase = async (albumData, id) => {
+        if (window.isReadOnly || !window.currentUser) {
+          alert("No tienes permisos para modificar este catálogo.");
+          return;
+        }
+        const userAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
+        if (id) {
+          await update(ref(db, `users/${window.currentUser.uid}/albums/${id}`), albumData);
+        } else {
+          await set(push(userAlbumsRef), albumData);
+        }
+      };
+
+      window.deleteAlbumFromFirebase = async (id) => {
+        if (window.isReadOnly || !window.currentUser) return;
+        if (confirm("¿Seguro que quieres eliminar este álbum?")) {
+          await remove(ref(db, `users/${window.currentUser.uid}/albums/${id}`));
+          window.toggleModal('detailModal');
+          window.showToast("Álbum eliminado");
+        }
+      };
+
+      window.saveSingleToFirebase = async (singleData, id) => {
+        if (window.isReadOnly || !window.currentUser) return;
+        const userSinglesRef = ref(db, `users/${window.currentUser.uid}/singles`);
+        if (id) {
+          await update(ref(db, `users/${window.currentUser.uid}/singles/${id}`), singleData);
+        } else {
+          await set(push(userSinglesRef), singleData);
+        }
+      };
+
+      window.deleteSingleFromFirebase = async (id) => {
+        if (window.isReadOnly || !window.currentUser) return;
+        if (confirm("¿Eliminar este sencillo?")) {
+          await remove(ref(db, `users/${window.currentUser.uid}/singles/${id}`));
+          window.showToast("Sencillo eliminado");
+        }
+      };
+
+      window.shareProfile = () => {
+        if (!window.currentUser) return;
+        const profileUrl = `${window.location.origin}${window.location.pathname}?user=${window.currentUser.uid}`;
+        navigator.clipboard.writeText(profileUrl);
+        window.showToast("Enlace de perfil público copiado al portapapeles");
+      };
+
+      window.loginWithGoogle = async () => {
+        try {
+          await signInWithPopup(auth, googleProvider);
+          window.toggleModal('loginModal');
+        } catch (err) {
+          alert("Error al iniciar con Google: " + err.message);
+        }
+      };
+
+      window.handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+          await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
+          window.toggleModal('loginModal');
+        } catch (err) {
+          alert("Error al iniciar sesión: " + err.message);
+        }
+      };
+
+      window.handleRegister = async (e) => {
+        e.preventDefault();
+        try {
+          await createUserWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
+          window.showToast("¡Cuenta creada con éxito!");
+          window.toggleModal('loginModal');
+        } catch (err) {
+          alert("Error al registrarse: " + err.message);
+        }
+      };
+
+      window.toggleAuth = () => {
+        if (window.currentUser) {
+          signOut(auth).then(() => {
+            window.location.href = window.location.pathname;
+          });
+        } else {
+          window.toggleModal('loginModal');
+        }
+      };
+    } catch (firebaseErr) {
+      console.error("Error inicializando Firebase:", firebaseErr);
+      window.toggleAuth = () => window.toggleModal('loginModal');
     }
-
-    function toggleModal(modalId) {
-      document.getElementById(modalId).classList.toggle('hidden');
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toastNotification');
-      document.getElementById('toastMessage').innerText = msg;
-      toast.classList.remove('hidden');
-      setTimeout(() => toast.classList.add('hidden'), 4000);
-    }
-
-    // GUÍA DE PUNTUACIÓN CON MISMA ESTÉTICA DE PÍLDORAS PARA ÁLBUMES Y CANCIONES
-    function switchGuideTab(tab) {
-      const list = document.getElementById('legendList');
-      const tabA = document.getElementById('guideTabAlbums');
-      const tabT = document.getElementById('guideTabTracks');
-
-      const renderRows = (items) => items.map(r =>
+  </script>
+</body>
+</html>
