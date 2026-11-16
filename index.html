@@ -8,242 +8,255 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --gold-primary: #D4AF37;
-      --gold-soft: #C5A059;
-      --gold-hover: #F3D06B;
-      --bg-dark: #070708;
-      --card-bg: #111113;
-      --card-border: rgba(212, 175, 55, 0.24);
+      --gold-primary: #D8B454;
+      --gold-soft: #B99746;
+      --gold-border: rgba(196, 159, 77, 0.38);
+      --gold-border-strong: rgba(218, 181, 86, 0.72);
+      --bg-dark: #0A0A0B;
     }
 
     body {
       background-color: var(--bg-dark);
-      background-image: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
-      color: #f5f5f5;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-image: radial-gradient(circle at 50% 0%, rgba(201, 162, 75, 0.06) 0%, transparent 65%);
+      color: #F4F4F5;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    .tracks-scroll::-webkit-scrollbar { width: 8px; }
+    .tracks-scroll::-webkit-scrollbar-track {
+      background: #141315;
+      border-radius: 999px;
+      border: 1px solid rgba(196, 159, 77, 0.2);
+    }
+    .tracks-scroll::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #D5B156 0%, #9E7C2F 100%);
+      border-radius: 999px;
+      border: 1px solid #141315;
+    }
+    .tracks-scroll::-webkit-scrollbar-thumb:hover {
+      background: #E8C76B;
     }
 
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #0d0d0f; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.45); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
+    ::-webkit-scrollbar-track { background: #0E0E10; }
+    ::-webkit-scrollbar-thumb { background: rgba(196, 159, 77, 0.45); border-radius: 10px; }
 
-    .gold-text { color: var(--gold-primary); }
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #FFFFFF 0%, #E6C770 55%, #B58E3E 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .gold-btn {
-      background: linear-gradient(135deg, #E2BE53 0%, #A9822B 100%);
-      color: #09090b;
+    .gold-pill-btn {
+      background: linear-gradient(180deg, #E2BF62 0%, #B48D36 100%);
+      color: #11100D;
       font-weight: 800;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 2px 12px rgba(212, 175, 55, 0.22);
+      border: 1px solid #F2D680;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.65), 0 0 12px rgba(216, 180, 84, 0.22);
     }
-    .gold-btn:hover {
-      background: linear-gradient(135deg, #F5D56E 0%, #C89E36 100%);
-      transform: translateY(-1.5px);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.38);
+    .gold-pill-btn:hover {
+      background: linear-gradient(180deg, #EED07A 0%, #C69E42 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(216, 180, 84, 0.38);
     }
 
-    .glass-card {
-      background: linear-gradient(180deg, rgba(22, 22, 25, 0.94) 0%, rgba(13, 13, 15, 0.98) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      backdrop-filter: blur(12px);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    .stat-box {
+      background: linear-gradient(180deg, #161618 0%, #111113 100%);
+      border: 1px solid var(--gold-border);
+      border-radius: 11px;
+      transition: border-color 0.25s ease;
     }
-    .glass-card:hover {
-      border-color: rgba(212, 175, 55, 0.6);
+    .stat-box:hover {
+      border-color: var(--gold-border-strong);
+    }
+
+    .album-card {
+      background: #141416;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 11px;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .album-card:hover {
+      border-color: var(--gold-border-strong);
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.75), 0 0 15px rgba(212, 175, 55, 0.1);
+      box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.85), 0 0 16px rgba(201, 162, 75, 0.14);
     }
 
-    .modal-glass {
-      background: linear-gradient(180deg, rgba(20, 19, 22, 0.97) 0%, rgba(12, 12, 14, 0.99) 100%);
-      border: 1px solid rgba(212, 175, 55, 0.38);
-      box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.08);
-      backdrop-filter: blur(22px);
+    .modal-frame {
+      background: linear-gradient(180deg, #19181B 0%, #121114 100%);
+      border: 1px solid rgba(205, 168, 82, 0.52);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.96), 0 0 45px rgba(205, 168, 82, 0.09);
     }
 
-    @keyframes modalPopIn {
-      0% { opacity: 0; transform: scale(0.95) translateY(10px); }
+    .track-item-row {
+      background: #1C1B1E;
+      border: 1px solid rgba(205, 168, 82, 0.32);
+      border-radius: 10px;
+      transition: all 0.18s ease;
+    }
+    .track-item-row:hover {
+      background: #232126;
+      border-color: rgba(226, 191, 98, 0.68);
+      transform: translateX(2px);
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.96) translateY(8px); }
       100% { opacity: 1; transform: scale(1) translateY(0); }
     }
-    @keyframes fadeSlideUp {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes badgePulse {
-      0% { transform: scale(0.95); }
-      50% { transform: scale(1.03); }
-      100% { transform: scale(1); }
-    }
-
-    .animate-modal {
-      animation: modalPopIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .animate-card {
-      animation: fadeSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-    .track-row {
-      transition: all 0.2s ease;
-    }
-    .track-row:hover {
-      background-color: rgba(255, 255, 255, 0.04);
-      border-color: rgba(212, 175, 55, 0.5);
-      transform: translateX(3px);
-    }
-    .score-pill {
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .track-row:hover .score-pill {
-      transform: scale(1.04);
+    .animate-pop {
+      animation: popIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   </style>
 </head>
-<body class="min-h-screen pb-14 selection:bg-yellow-500/30 selection:text-yellow-200">
+<body class="min-h-screen pb-16 selection:bg-yellow-500/30 selection:text-yellow-200">
 
-  <!-- ENCABEZADO PRINCIPAL -->
-  <header class="border-b border-neutral-800/90 bg-black/85 sticky top-0 z-40 backdrop-blur-xl">
-    <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col lg:flex-row items-center justify-between gap-4">
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <header class="border-b border-neutral-800/90 bg-[#0D0D0F]/95 sticky top-0 z-40 backdrop-blur-xl">
+    <div class="max-w-[1380px] mx-auto px-4 md:px-6 py-3 flex flex-col lg:flex-row items-center justify-between gap-3.5">
       
       <!-- LOGO -->
-      <div class="flex items-center gap-3 cursor-pointer group" onclick="switchView('albums')">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E6C770] via-[#D4AF37] to-[#8C6A22] flex items-center justify-center text-black font-black text-xl shadow-lg group-hover:scale-105 transition-transform">
+      <div class="flex items-center gap-3 cursor-pointer shrink-0 group" onclick="switchView('albums')">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-[#E7C66B] to-[#9E7827] flex items-center justify-center text-[#0D0C0A] font-black text-xl shadow group-hover:scale-105 transition-transform">
           R
         </div>
-        <div>
-          <h1 class="text-xl md:text-2xl font-black tracking-wider uppercase gold-gradient-text leading-none">RANKING BLASTICO</h1>
-          <p id="headerSubtitle" class="text-[11px] text-neutral-400 mt-1">Inicia sesión para gestionar tu ranking</p>
-        </div>
+        <h1 class="text-lg md:text-xl font-black tracking-wide uppercase text-[#E2BF60]">RANKING BLASTICO</h1>
       </div>
 
       <!-- BUSCADOR -->
       <div class="relative flex-1 max-w-md w-full">
-        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500 text-sm"></i>
         <input type="text" id="searchInput" oninput="renderApp()" placeholder="Buscar por álbum, artista, género o sencillo..." 
-               class="w-full bg-neutral-900/90 border border-neutral-800 rounded-full pl-10 pr-4 py-2 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-yellow-500/70 transition">
+               class="w-full bg-[#171719] border border-neutral-800 rounded-lg pl-4 pr-10 py-2 text-xs text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-[#C9A24B] transition">
+        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 text-xs"></i>
       </div>
 
-      <!-- BOTONES DE NAVEGACIÓN -->
-      <div class="flex items-center gap-2 flex-wrap w-full lg:w-auto justify-center lg:justify-end">
-        <button id="viewAlbumsBtn" type="button" onclick="switchView('albums')" class="px-3.5 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 border border-yellow-500/50 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-compact-disc"></i> Álbumes
+      <!-- BOTONES DE NAVEGACIÓN DERECHA -->
+      <div class="flex items-center gap-2 flex-wrap justify-center lg:justify-end">
+        <button id="viewAlbumsBtn" type="button" onclick="switchView('albums')" class="px-4 py-1.5 rounded-full bg-[#242016] text-[#E2BF60] border border-[#C9A24B] text-xs font-bold transition cursor-pointer">
+          Álbumes
         </button>
-        <button id="viewArtistsBtn" type="button" onclick="switchView('artists')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-users"></i> Artistas
+        <button id="viewRankingBtn" type="button" onclick="switchView('ranking')" class="px-4 py-1.5 rounded-full bg-[#18181B] border border-neutral-800 text-neutral-300 hover:border-neutral-600 text-xs font-medium transition cursor-pointer">
+          Top Álbumes
         </button>
-        <button id="viewSinglesBtn" type="button" onclick="switchView('singles')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5 relative cursor-pointer">
-          <i class="fa-solid fa-music"></i> Sencillos
-          <span class="bg-yellow-500 text-black text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase">Nuevo</span>
+        <button id="viewArtistsBtn" type="button" onclick="switchView('artists')" class="px-4 py-1.5 rounded-full bg-[#18181B] border border-neutral-800 text-neutral-300 hover:border-neutral-600 text-xs font-medium transition cursor-pointer">
+          Artistas
+        </button>
+        <button id="viewSinglesBtn" type="button" onclick="switchView('singles')" class="relative px-4 py-1.5 rounded-full bg-[#18181B] border border-neutral-800 text-neutral-300 hover:border-neutral-600 text-xs font-medium transition cursor-pointer">
+          Sencillos
+          <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#E2BF60] text-[#0D0C0A] text-[8px] font-black px-1.5 py-0.2 rounded-full uppercase tracking-tighter shadow">
+            ¡NUEVO!
+          </span>
         </button>
         
-        <button type="button" onclick="toggleModal('legendModal')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:text-yellow-400 hover:border-yellow-600/40 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-list-ol"></i> Guía
+        <button type="button" onclick="toggleModal('legendModal')" class="px-4 py-1.5 rounded-full bg-[#18181B] border border-neutral-800 text-neutral-300 hover:border-neutral-600 text-xs font-medium transition cursor-pointer">
+          Guía
         </button>
 
-        <button id="shareBtn" type="button" onclick="shareProfile()" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:bg-neutral-800 text-xs font-semibold transition hidden items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-share-nodes"></i> Compartir
+        <button id="shareBtn" type="button" onclick="shareProfile()" class="px-4 py-1.5 rounded-full bg-[#18181B] border border-neutral-800 text-neutral-300 hover:border-neutral-600 text-xs font-medium transition cursor-pointer">
+          Compartir
         </button>
         
-        <button id="authBtn" type="button" onclick="toggleAuth()" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:bg-neutral-800 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-lock"></i> Iniciar Sesión / Registrarse
+        <button id="authBtn" type="button" onclick="toggleAuth()" class="px-4 py-1.5 rounded-full bg-[#18181B] border border-neutral-800 text-neutral-300 hover:border-neutral-600 text-xs font-medium transition cursor-pointer">
+          Iniciar Sesión / Registrarse
         </button>
       </div>
     </div>
   </header>
 
-  <!-- PANEL PRINCIPAL -->
-  <main class="max-w-7xl mx-auto px-4 mt-6">
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="max-w-[1380px] mx-auto px-4 md:px-6 mt-4">
     
-    <!-- BANNER MODO LECTURA (PERFIL DE TERCERO) -->
-    <div id="viewModeBanner" class="hidden mb-6 bg-neutral-900/90 border border-yellow-500/45 p-3.5 rounded-2xl text-sm flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
-      <div class="flex items-center gap-2.5 text-neutral-200">
-        <span class="w-8 h-8 rounded-full bg-yellow-500/15 border border-yellow-500/40 flex items-center justify-center text-yellow-400">
-          <i class="fa-solid fa-eye"></i>
-        </span>
-        <span>Estás viendo el ranking público de otro usuario. Abre cualquier álbum y toca <strong>"Copiar álbum a mi ranking"</strong> para guardarlo y editarlo en tu cuenta.</span>
-      </div>
-      <div class="flex items-center gap-2 shrink-0">
-        <a id="goMyRankingBtn" href="?" class="gold-btn px-4 py-1.5 rounded-full text-xs">
-          Ir a mi cuenta
+    <!-- SUB-BARRA DE ESTADO Y BOTONES "+ AÑADIR SENCILLO" / "+ AÑADIR ÁLBUM" -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-neutral-800/70 mb-5">
+      <div class="flex items-center gap-2 text-xs text-neutral-400">
+        <span id="headerSubtitle">Inicia sesión para gestionar tu ranking</span>
+        <a id="goMyRankingBtn" href="?" class="hidden ml-2 text-[#E2BF60] hover:underline font-semibold">
+          (Volver a mi cuenta)
         </a>
       </div>
-    </div>
 
-    <!-- BARRA DE ACCIONES RÁPIDAS -->
-    <div id="userActionsBar" class="hidden mb-6 flex flex-wrap items-center justify-between gap-3 bg-neutral-900/45 border border-neutral-800/80 p-3 rounded-2xl">
-      <div class="flex items-center gap-2 text-xs text-neutral-400">
-        <i class="fa-solid fa-sparkles text-yellow-500"></i>
-        <span>Gestiona tu colección musical</span>
-      </div>
-      <div class="flex items-center gap-2.5 flex-wrap">
-        <button id="pasteAlbumBtn" type="button" onclick="pasteCopiedAlbum()" class="hidden px-4 py-2 rounded-full bg-yellow-500/15 border border-yellow-500/60 text-yellow-300 hover:bg-yellow-500/25 text-xs font-bold transition flex items-center gap-1.5 animate-pulse cursor-pointer">
-          <i class="fa-solid fa-paste"></i> Pegar Álbum Copiado (<span id="copiedAlbumNameBadge"></span>)
+      <div id="userActionsBar" class="flex items-center gap-2.5 flex-wrap">
+        <button id="pasteAlbumBtn" type="button" onclick="pasteCopiedAlbum()" class="hidden px-4 py-1.5 rounded-full bg-[#242016] border border-[#E2BF60] text-[#E2BF60] hover:bg-[#2F291B] text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-paste"></i> Pegar Álbum (<span id="copiedAlbumNameBadge"></span>)
         </button>
 
-        <button type="button" onclick="openSingleModal()" class="px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-plus text-yellow-400"></i> Añadir Sencillo
+        <button id="addSingleTopBtn" type="button" onclick="openSingleModal()" class="px-4 py-1.5 rounded-full bg-[#18181B] hover:bg-[#222226] text-neutral-200 border border-neutral-700 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-plus text-[10px]"></i> Añadir Sencillo
         </button>
 
-        <button type="button" onclick="openAddModal()" class="gold-btn px-4 py-2 rounded-full text-xs flex items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-plus"></i> Añadir Álbum
+        <div class="relative inline-block">
+          <span id="lockBadgeIcon" class="hidden absolute -top-2.5 right-1 w-5 h-5 rounded-full bg-[#1C1B1E] border border-neutral-700 text-neutral-400 text-[9px] flex items-center justify-center shadow pointer-events-none">
+            <i class="fa-solid fa-lock"></i>
+          </span>
+          <button id="addAlbumTopBtn" type="button" onclick="openAddModal()" class="px-4 py-1.5 rounded-full bg-[#1F1F23] hover:bg-[#29292E] text-neutral-200 border border-neutral-700 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-plus text-[10px]"></i> Añadir Álbum
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILA DE ESTADÍSTICAS + BOTÓN COPIAR RANKING Y ORDENAR -->
+    <div class="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-4 mb-6">
+      
+      <!-- 4 TARJETAS DE ESTADÍSTICAS -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 flex-1 max-w-4xl">
+        <div class="stat-box py-3.5 px-4 text-center">
+          <p class="text-[10px] text-neutral-400 uppercase tracking-wider font-semibold">ÁLBUMES EN GALERÍA</p>
+          <p id="statTotalAlbums" class="text-2xl md:text-3xl font-black text-white mt-1">0</p>
+        </div>
+        <div class="stat-box py-3.5 px-4 text-center">
+          <p class="text-[10px] text-neutral-400 uppercase tracking-wider font-semibold">JOYITAS (94-99)</p>
+          <p id="statJoyitas" class="text-2xl md:text-3xl font-black text-white mt-1">0</p>
+        </div>
+        <div class="stat-box py-3.5 px-4 text-center">
+          <p class="text-[10px] text-neutral-400 uppercase tracking-wider font-semibold">BLASTICO / PONEDOR (100)</p>
+          <p id="statPonedor" class="text-2xl md:text-3xl font-black text-white mt-1">0</p>
+        </div>
+        <div class="stat-box py-3.5 px-4 text-center">
+          <p class="text-[10px] text-neutral-400 uppercase tracking-wider font-semibold">TOTAL CANCIONES</p>
+          <p id="statTotalTracks" class="text-2xl md:text-3xl font-black text-[#C9A24B] mt-1">0</p>
+        </div>
+      </div>
+
+      <!-- CONTROLES DERECHA -->
+      <div class="flex flex-col items-end justify-between gap-2.5 shrink-0">
+        <button id="copyFullRankingBtn" type="button" onclick="copyFullRankingToAccount()" class="hidden gold-pill-btn px-4 py-2 rounded-lg text-xs flex items-center gap-2 cursor-pointer">
+          <i class="fa-regular fa-copy"></i> Copiar Ranking a mi Cuenta
         </button>
+
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-neutral-400">Ordenar:</span>
+          <select id="sortSelect" onchange="renderApp()" class="bg-[#171719] border border-neutral-800 text-xs text-neutral-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-[#C9A24B] cursor-pointer">
+            <option value="score-desc">Mejor Puntuación</option>
+            <option value="score-asc">Peor Puntuación</option>
+            <option value="year-desc">Año: Más reciente</option>
+            <option value="title-asc">Nombre (A-Z)</option>
+          </select>
+        </div>
       </div>
     </div>
 
-    <!-- PANEL DE ESTADÍSTICAS -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-      <div class="glass-card p-4 text-center">
-        <p class="text-[11px] text-neutral-400 uppercase tracking-wider font-semibold">Álbumes en Galería</p>
-        <p id="statTotalAlbums" class="text-3xl font-black text-white mt-1">0</p>
-      </div>
-      <div class="glass-card p-4 text-center">
-        <p class="text-[11px] text-neutral-400 uppercase tracking-wider font-semibold">JOYITAS (94-99)</p>
-        <p id="statJoyitas" class="text-3xl font-black text-neutral-200 mt-1">0</p>
-      </div>
-      <div class="glass-card p-4 text-center">
-        <p class="text-[11px] text-neutral-400 uppercase tracking-wider font-semibold">BLASTICO (100)</p>
-        <p id="statPonedor" class="text-3xl font-black text-neutral-200 mt-1">0</p>
-      </div>
-      <div class="glass-card p-4 text-center">
-        <p class="text-[11px] text-neutral-400 uppercase tracking-wider font-semibold">Total Canciones</p>
-        <p id="statTotalTracks" class="text-3xl font-black gold-text mt-1">0</p>
-      </div>
-    </div>
+    <!-- FILTROS DE GÉNERO (OCULTOS AUTOMÁTICAMENTE EN ARTISTAS) -->
+    <div class="flex items-center gap-2 flex-wrap mb-6" id="genreFilters"></div>
 
-    <!-- BARRA DE FILTROS Y ORDENAMIENTO -->
-    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 bg-neutral-900/40 p-3.5 rounded-2xl border border-neutral-800/80">
-      <div class="flex items-center gap-2 flex-wrap" id="genreFilters"></div>
-      <div class="flex items-center gap-2 self-end md:self-auto">
-        <span class="text-xs text-neutral-400 font-semibold"><i class="fa-solid fa-sort text-yellow-500/80"></i> Ordenar:</span>
-        <select id="sortSelect" onchange="renderApp()" class="bg-neutral-900 border border-neutral-700 text-xs text-white rounded-full px-3.5 py-1.5 focus:outline-none focus:border-yellow-500">
-          <option value="score-desc">Mejor Puntuación (Mayor a Menor)</option>
-          <option value="score-asc">Peor Puntuación (Menor a Mayor)</option>
-          <option value="year-desc">Año: Más reciente</option>
-          <option value="title-asc">Nombre (A-Z)</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- GRILLA DE CONTENIDO -->
+    <!-- GRILLA DE ÁLBUMES / LISTAS -->
     <div id="mainContainer">
-      <div id="albumsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"></div>
-      <div id="singlesList" class="hidden space-y-3 max-w-4xl mx-auto"></div>
-      <div id="artistsList" class="hidden space-y-3 max-w-4xl mx-auto"></div>
+      <div id="albumsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-4"></div>
+      <div id="albumsRankingList" class="hidden space-y-2.5 max-w-4xl mx-auto"></div>
+      <div id="singlesList" class="hidden space-y-2.5 max-w-4xl mx-auto"></div>
+      <div id="artistsList" class="hidden space-y-2.5 max-w-4xl mx-auto"></div>
     </div>
   </main>
 
+  <!-- MODAL DE DETALLES DEL ÁLBUM -->
+  <div id="detailModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="modal-frame rounded-2xl max-w-[840px] w-full max-h-[92vh] overflow-y-auto p-6 relative animate-pop">
+      <div id="detailModalContent"></div>
+    </div>
+  </div>
+
   <!-- MODAL DE LOGIN / REGISTRO -->
   <div id="loginModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="modal-glass rounded-2xl max-w-sm w-full p-6 relative animate-modal">
-      <button type="button" onclick="toggleModal('loginModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-800/80 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer">
+    <div class="modal-frame rounded-2xl max-w-sm w-full p-6 relative animate-pop">
+      <button type="button" onclick="toggleModal('loginModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h3 class="text-xl font-bold text-white mb-4">Iniciar Sesión o Registrarse</h3>
+      <h3 class="text-lg font-bold text-white mb-4">Iniciar Sesión o Registrarse</h3>
       
       <button type="button" onclick="loginWithGoogle()" class="w-full bg-white text-black hover:bg-neutral-200 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 mb-4 transition cursor-pointer">
         <i class="fa-brands fa-google"></i> Continuar con Google
@@ -258,102 +271,95 @@
       <form onsubmit="handleLogin(event)" class="space-y-3 mt-2">
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Email</label>
-          <input type="email" id="loginEmail" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          <input type="email" id="loginEmail" required class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
         </div>
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Contraseña (mínimo 6 caracteres)</label>
-          <input type="password" id="loginPassword" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          <input type="password" id="loginPassword" required class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="submit" class="flex-1 gold-btn py-2.5 rounded-xl text-sm cursor-pointer">Entrar</button>
+          <button type="submit" class="flex-1 gold-pill-btn py-2.5 rounded-xl text-sm cursor-pointer">Entrar</button>
           <button type="button" onclick="handleRegister(event)" class="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white py-2.5 rounded-xl text-sm font-bold border border-neutral-700 transition cursor-pointer">Registrarse</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- MODAL DE DETALLES DEL ÁLBUM -->
-  <div id="detailModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="modal-glass rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 relative animate-modal">
-      <div id="detailModalContent"></div>
-    </div>
-  </div>
-
   <!-- MODAL PARA AÑADIR / EDITAR ÁLBUM -->
   <div id="albumFormModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="modal-glass rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative animate-modal">
+    <div class="modal-frame rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative animate-pop">
       <button type="button" onclick="toggleModal('albumFormModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h3 id="formModalTitle" class="text-xl font-bold text-white mb-4">Añadir Nuevo Álbum</h3>
+      <h3 id="formModalTitle" class="text-lg font-bold text-white mb-4">Añadir Nuevo Álbum</h3>
       
       <form id="albumForm" onsubmit="saveAlbum(event)" class="space-y-4">
         <input type="hidden" id="editAlbumId">
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Título del Álbum *</label>
-          <input type="text" id="formTitle" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          <input type="text" id="formTitle" required class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-xs text-neutral-400 mb-1">Artista Principal *</label>
-            <input type="text" id="formArtist" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+            <input type="text" id="formArtist" required class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
           </div>
           <div>
             <label class="block text-xs text-neutral-400 mb-1">Año de Lanzamiento</label>
-            <input type="number" id="formYear" min="1900" max="2099" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+            <input type="number" id="formYear" min="1900" max="2099" class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
           </div>
         </div>
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Género Musical *</label>
-          <input type="text" id="formGenre" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          <input type="text" id="formGenre" required class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
         </div>
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Portada del Álbum</label>
           <div class="space-y-2">
-            <input type="file" id="formCoverFile" accept="image/*" onchange="handleFileSelect(event, 'formCoverUrl')" class="w-full text-xs text-neutral-400 bg-neutral-900 rounded-xl p-2 border border-neutral-700">
-            <input type="url" id="formCoverUrl" placeholder="O pega un enlace de imagen (http...)" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+            <input type="file" id="formCoverFile" accept="image/*" onchange="handleFileSelect(event, 'formCoverUrl')" class="w-full text-xs text-neutral-400 bg-[#111113] rounded-xl p-2 border border-neutral-700">
+            <input type="url" id="formCoverUrl" placeholder="O pega un enlace de imagen (http...)" class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
           </div>
         </div>
         <div>
           <div class="flex items-center justify-between mb-1">
             <label class="text-xs text-neutral-400">Canciones, Colaboraciones (ft.) y Puntuación (1-100)</label>
-            <button type="button" onclick="addTrackInput()" class="text-xs gold-text font-semibold hover:underline cursor-pointer"><i class="fa-solid fa-plus"></i> Agregar Tema</button>
+            <button type="button" onclick="addTrackInput()" class="text-xs text-[#E2BF60] font-semibold hover:underline cursor-pointer"><i class="fa-solid fa-plus"></i> Agregar Tema</button>
           </div>
           <p class="text-[11px] text-neutral-500 mb-2">Para añadir varios artistas en <strong>ft.</strong>, escribe cada uno y presiona <kbd class="px-1.5 py-0.5 bg-neutral-800 rounded text-neutral-300">Enter</kbd> o toca <strong>+ Artista</strong>.</p>
           <div id="tracksInputContainer" class="space-y-2.5 max-h-60 overflow-y-auto pr-1"></div>
         </div>
-        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-sm mt-4 cursor-pointer">Guardar Álbum</button>
+        <button type="submit" class="w-full gold-pill-btn py-3 rounded-xl text-sm mt-4 cursor-pointer">Guardar Álbum</button>
       </form>
     </div>
   </div>
 
   <!-- MODAL PARA AÑADIR / EDITAR SENCILLO -->
   <div id="singleFormModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="modal-glass rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6 relative animate-modal">
+    <div class="modal-frame rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6 relative animate-pop">
       <button type="button" onclick="toggleModal('singleFormModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h3 id="singleModalTitle" class="text-xl font-bold text-white mb-4">Rankear Sencillo</h3>
+      <h3 id="singleModalTitle" class="text-lg font-bold text-white mb-4">Rankear Sencillo</h3>
       
       <form id="singleForm" onsubmit="saveSingle(event)" class="space-y-4">
         <input type="hidden" id="editSingleId">
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Nombre del Sencillo *</label>
-          <input type="text" id="singleTitle" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          <input type="text" id="singleTitle" required class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
         </div>
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Artista Principal *</label>
-          <input type="text" id="singleArtist" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          <input type="text" id="singleArtist" required class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
         </div>
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Ft. (Artistas Invitados - escribe y presiona Enter o +)</label>
-          <div class="bg-neutral-900 border border-neutral-700 rounded-xl p-2 focus-within:border-yellow-500">
+          <div class="bg-[#111113] border border-neutral-700 rounded-xl p-2 focus-within:border-[#C9A24B]">
             <div id="singleFtTags" class="flex flex-wrap gap-1.5 mb-1.5"></div>
             <div class="flex items-center gap-1.5">
               <input type="text" id="singleFtInput" placeholder="Ej: Duki, Quevedo..." 
                      onkeydown="handleSingleFtKeydown(event)"
                      class="flex-1 bg-transparent text-xs text-white focus:outline-none">
-              <button type="button" onclick="addSingleFtTagFromInput()" class="px-2.5 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-yellow-400 text-xs font-bold cursor-pointer">
+              <button type="button" onclick="addSingleFtTagFromInput()" class="px-2.5 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-[#E2BF60] text-xs font-bold cursor-pointer">
                 + Añadir
               </button>
             </div>
@@ -362,41 +368,41 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs text-neutral-400 mb-1">Género *</label>
-            <input type="text" id="singleGenre" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+            <input type="text" id="singleGenre" required class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
           </div>
           <div>
             <label class="block text-xs text-neutral-400 mb-1">Año</label>
-            <input type="number" id="singleYear" min="1900" max="2099" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+            <input type="number" id="singleYear" min="1900" max="2099" class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
           </div>
         </div>
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Puntuación (1 a 100) *</label>
-          <input type="number" id="singleScore" min="1" max="100" step="0.01" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white font-bold focus:border-yellow-500 focus:outline-none">
+          <input type="number" id="singleScore" min="1" max="100" step="0.01" required class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white font-bold focus:border-[#C9A24B] focus:outline-none">
         </div>
         <div>
           <label class="block text-xs text-neutral-400 mb-1">Portada del Sencillo</label>
           <div class="space-y-2">
-            <input type="file" accept="image/*" onchange="handleFileSelect(event, 'singleCoverUrl')" class="w-full text-xs text-neutral-400 bg-neutral-900 rounded-xl p-2 border border-neutral-700">
-            <input type="url" id="singleCoverUrl" placeholder="O pega un enlace de imagen (http...)" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+            <input type="file" accept="image/*" onchange="handleFileSelect(event, 'singleCoverUrl')" class="w-full text-xs text-neutral-400 bg-[#111113] rounded-xl p-2 border border-neutral-700">
+            <input type="url" id="singleCoverUrl" placeholder="O pega un enlace de imagen (http...)" class="w-full bg-[#111113] border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#C9A24B] focus:outline-none">
           </div>
         </div>
-        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-sm mt-2 cursor-pointer">Guardar Sencillo</button>
+        <button type="submit" class="w-full gold-pill-btn py-3 rounded-xl text-sm mt-2 cursor-pointer">Guardar Sencillo</button>
       </form>
     </div>
   </div>
 
   <!-- MODAL GUÍA DE PUNTUACIONES -->
   <div id="legendModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="modal-glass rounded-3xl max-w-md w-full p-6 relative animate-modal">
+    <div class="modal-frame rounded-2xl max-w-md w-full p-6 relative animate-pop">
       <button type="button" onclick="toggleModal('legendModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-        <i class="fa-solid fa-trophy gold-text"></i> Guía de Puntuación
+      <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+        <i class="fa-solid fa-trophy text-[#E2BF60]"></i> Guía de Puntuación
       </h3>
 
       <div class="flex border-b border-neutral-800 mb-4">
-        <button id="guideTabAlbums" type="button" onclick="switchGuideTab('albums')" class="flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400 cursor-pointer">
+        <button id="guideTabAlbums" type="button" onclick="switchGuideTab('albums')" class="flex-1 py-2 text-sm font-bold border-b-2 border-[#E2BF60] text-[#E2BF60] cursor-pointer">
           Álbumes
         </button>
         <button id="guideTabTracks" type="button" onclick="switchGuideTab('tracks')" class="flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white cursor-pointer">
@@ -409,22 +415,13 @@
   </div>
 
   <!-- TOAST DE NOTIFICACIÓN -->
-  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden bg-neutral-900 border border-yellow-500/60 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm animate-modal">
-    <i class="fa-solid fa-circle-check text-yellow-400 text-lg"></i>
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden bg-[#18171A] border border-[#E2BF60] text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-semibold animate-pop">
+    <i class="fa-solid fa-circle-check text-[#E2BF60] text-base"></i>
     <span id="toastMessage">Acción completada</span>
   </div>
 
-  <!-- SCRIPT UNIFICADO (INTERFAZ + FIREBASE) -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { 
-      getDatabase, ref, onValue, push, set, remove, update 
-    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    import { 
-      getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, 
-      signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged 
-    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
+  <!-- SCRIPT 1: INTERFAZ INMEDIATA -->
+  <script>
     const DEFAULT_COVER = "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=600&q=80";
 
     window.currentUser = null;
@@ -436,7 +433,6 @@
     window.selectedGenre = 'Todos';
     window.currentSingleFtList = [];
 
-    // --- FUNCIONES DE INTERFAZ Y UTILIDADES (DISPONIBLES DESDE EL INICIO) ---
     window.toggleModal = function(modalId) {
       const el = document.getElementById(modalId);
       if (el) el.classList.toggle('hidden');
@@ -448,23 +444,24 @@
       if (!toast || !txt) return;
       txt.innerText = msg;
       toast.classList.remove('hidden');
-      setTimeout(() => toast.classList.add('hidden'), 4000);
+      setTimeout(() => toast.classList.add('hidden'), 4200);
     };
 
     window.switchView = function(view) {
       window.currentView = view;
-      const views = ['albums', 'singles', 'artists'];
+      const views = ['albums', 'ranking', 'artists', 'singles'];
       views.forEach(v => {
         const btn = document.getElementById(`view${v.charAt(0).toUpperCase() + v.slice(1)}Btn`);
         if (!btn) return;
         if (v === view) {
-          btn.className = "px-3.5 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 border border-yellow-500/50 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer";
+          btn.className = "relative px-4 py-1.5 rounded-full bg-[#242016] text-[#E2BF60] border border-[#C9A24B] text-xs font-bold transition cursor-pointer";
         } else {
-          btn.className = "px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer";
+          btn.className = "relative px-4 py-1.5 rounded-full bg-[#18181B] border border-neutral-800 text-neutral-300 hover:border-neutral-600 text-xs font-medium transition cursor-pointer";
         }
       });
 
       document.getElementById('albumsGrid').classList.toggle('hidden', view !== 'albums');
+      document.getElementById('albumsRankingList').classList.toggle('hidden', view !== 'ranking');
       document.getElementById('singlesList').classList.toggle('hidden', view !== 'singles');
       document.getElementById('artistsList').classList.toggle('hidden', view !== 'artists');
       window.renderApp();
@@ -482,45 +479,45 @@
       if (!list) return;
 
       const renderRows = (items) => items.map(r => `
-        <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-between">
+        <div class="p-2.5 rounded-xl bg-[#131315] border border-neutral-800 flex items-center justify-between">
           <span class="text-neutral-300 font-semibold">${r.range}</span>
           <span class="px-3 py-0.5 rounded-full text-xs font-bold shadow-sm" style="background:${r.bg}; color:${r.text};">${r.label}</span>
         </div>
       `).join('');
 
       if (tab === 'albums') {
-        tabA.className = "flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400 cursor-pointer";
+        tabA.className = "flex-1 py-2 text-sm font-bold border-b-2 border-[#E2BF60] text-[#E2BF60] cursor-pointer";
         tabT.className = "flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white cursor-pointer";
         const albumRanges = [
-          { range: "100", label: "BLASTICO", bg: "#7c4dff", text: "#fff" },
-          { range: "94 a 99", label: "JOYITA", bg: "#9c27b0", text: "#fff" },
-          { range: "86 a 93", label: "ES UNA BANDAA", bg: "#2e7d32", text: "#fff" },
-          { range: "82 a 85", label: "Primee", bg: "#43a047", text: "#fff" },
-          { range: "78 a 81", label: "Lindaaaa", bg: "#66bb6a", text: "#0a0a0a" },
-          { range: "70 a 77", label: "me gusta", bg: "#4caf50", text: "#0a0a0a" },
-          { range: "65 a 69", label: "Esta bien", bg: "#cddc39", text: "#0a0a0a" },
-          { range: "60 a 64", label: "Cumple", bg: "#fbc02d", text: "#0a0a0a" },
-          { range: "51 a 59", label: "Normal", bg: "#ff9800", text: "#0a0a0a" },
-          { range: "41 a 50", label: "No me gusta", bg: "#f57c00", text: "#fff" },
-          { range: "1 a 40", label: "Inescuchable", bg: "#d32f2f", text: "#fff" }
+          { range: "100", label: "BLASTICO", bg: "#8257E5", text: "#fff" },
+          { range: "94 a 99", label: "JOYITA", bg: "#9B4DCA", text: "#fff" },
+          { range: "86 a 93", label: "ES UNA BANDAA", bg: "#2E8B57", text: "#fff" },
+          { range: "82 a 85", label: "Primee", bg: "#52B788", text: "#0D0C0A" },
+          { range: "78 a 81", label: "Lindaaaa", bg: "#74C69D", text: "#0D0C0A" },
+          { range: "70 a 77", label: "me gusta", bg: "#56AB91", text: "#0D0C0A" },
+          { range: "65 a 69", label: "Esta bien", bg: "#CDDC39", text: "#0D0C0A" },
+          { range: "60 a 64", label: "Cumple", bg: "#FBC02D", text: "#0D0C0A" },
+          { range: "51 a 59", label: "Normal", bg: "#FF9800", text: "#0D0C0A" },
+          { range: "41 a 50", label: "No me gusta", bg: "#F57C00", text: "#fff" },
+          { range: "1 a 40", label: "Inescuchable", bg: "#D32F2F", text: "#fff" }
         ];
         list.innerHTML = renderRows(albumRanges);
       } else {
-        tabT.className = "flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400 cursor-pointer";
+        tabT.className = "flex-1 py-2 text-sm font-bold border-b-2 border-[#E2BF60] text-[#E2BF60] cursor-pointer";
         tabA.className = "flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white cursor-pointer";
         const trackRanges = [
-          { range: "100", label: "Ponedor", bg: "#7c4dff", text: "#fff" },
-          { range: "94 a 99", label: "JOYITA", bg: "#9c27b0", text: "#fff" },
-          { range: "86 a 93", label: "ES UNA BANDAA", bg: "#2e7d32", text: "#fff" },
-          { range: "82 a 85", label: "Primee", bg: "#43a047", text: "#fff" },
-          { range: "78 a 81", label: "Lindaaaa", bg: "#66bb6a", text: "#0a0a0a" },
-          { range: "70 a 77", label: "me gusta", bg: "#4caf50", text: "#0a0a0a" },
-          { range: "69", label: "no es mi estilo", bg: "#8d6e63", text: "#fff" },
-          { range: "65 a 68", label: "Esta bien", bg: "#cddc39", text: "#0a0a0a" },
-          { range: "60 a 64", label: "Cumple", bg: "#fbc02d", text: "#0a0a0a" },
-          { range: "51 a 59", label: "Ignorable", bg: "#ff9800", text: "#0a0a0a" },
-          { range: "41 a 50", label: "No me gusta", bg: "#f57c00", text: "#fff" },
-          { range: "1 a 40", label: "Inescuchable", bg: "#d32f2f", text: "#fff" }
+          { range: "100", label: "Ponedor", bg: "#8257E5", text: "#fff" },
+          { range: "94 a 99", label: "JOYITA", bg: "#9B4DCA", text: "#fff" },
+          { range: "86 a 93", label: "ES UNA BANDAA", bg: "#2E8B57", text: "#fff" },
+          { range: "82 a 85", label: "Primee", bg: "#52B788", text: "#0D0C0A" },
+          { range: "78 a 81", label: "Lindaaaa", bg: "#74C69D", text: "#0D0C0A" },
+          { range: "70 a 77", label: "me gusta", bg: "#56AB91", text: "#0D0C0A" },
+          { range: "69", label: "no es mi estilo", bg: "#8D6E63", text: "#fff" },
+          { range: "65 a 68", label: "Esta bien", bg: "#CDDC39", text: "#0D0C0A" },
+          { range: "60 a 64", label: "Cumple", bg: "#FBC02D", text: "#0D0C0A" },
+          { range: "51 a 59", label: "Ignorable", bg: "#FF9800", text: "#0D0C0A" },
+          { range: "41 a 50", label: "No me gusta", bg: "#F57C00", text: "#fff" },
+          { range: "1 a 40", label: "Inescuchable", bg: "#D32F2F", text: "#fff" }
         ];
         list.innerHTML = renderRows(trackRanges);
       }
@@ -545,33 +542,33 @@
 
     function getTrackRatingInfo(score) {
       const s = Number(score);
-      if (s === 100) return { label: "Ponedor", bg: "#7c4dff", text: "#ffffff" };
-      if (s >= 94)  return { label: "JOYITA", bg: "#9c27b0", text: "#ffffff" };
-      if (s >= 86)  return { label: "ES UNA BANDAA", bg: "#2e7d32", text: "#ffffff" };
-      if (s >= 82)  return { label: "Primee", bg: "#43a047", text: "#ffffff" };
-      if (s >= 78)  return { label: "Lindaaaa", bg: "#66bb6a", text: "#0a0a0a" };
-      if (s >= 70)  return { label: "me gusta", bg: "#4caf50", text: "#0a0a0a" };
-      if (s >= 69)  return { label: "no es mi estilo", bg: "#8d6e63", text: "#ffffff" };
-      if (s >= 65)  return { label: "Esta bien", bg: "#cddc39", text: "#0a0a0a" };
-      if (s >= 60)  return { label: "Cumple", bg: "#fbc02d", text: "#0a0a0a" };
-      if (s >= 51)  return { label: "Ignorable", bg: "#ff9800", text: "#0a0a0a" };
-      if (s >= 41)  return { label: "No me gusta", bg: "#f57c00", text: "#ffffff" };
-      return { label: "Inescuchable", bg: "#d32f2f", text: "#ffffff" };
+      if (s === 100) return { label: "Ponedor", bg: "#7E57C2", text: "#ffffff" };
+      if (s >= 94)  return { label: "JOYITA", bg: "#9575CD", text: "#ffffff" };
+      if (s >= 86)  return { label: "ES UNA BANDAA", bg: "#2E8B57", text: "#ffffff" };
+      if (s >= 82)  return { label: "Primee", bg: "#66BB8A", text: "#0D0C0A" };
+      if (s >= 78)  return { label: "Lindaaaa", bg: "#74C69D", text: "#0D0C0A" };
+      if (s >= 70)  return { label: "me gusta", bg: "#63B88C", text: "#0D0C0A" };
+      if (s >= 69)  return { label: "no es mi estilo", bg: "#8D6E63", text: "#ffffff" };
+      if (s >= 65)  return { label: "Esta bien", bg: "#CDDC39", text: "#0D0C0A" };
+      if (s >= 60)  return { label: "Cumple", bg: "#FBC02D", text: "#0D0C0A" };
+      if (s >= 51)  return { label: "Ignorable", bg: "#FF9800", text: "#0D0C0A" };
+      if (s >= 41)  return { label: "No me gusta", bg: "#F57C00", text: "#ffffff" };
+      return { label: "Inescuchable", bg: "#D32F2F", text: "#ffffff" };
     }
 
     function getAlbumRatingInfo(avg) {
       const s = Number(avg);
-      if (s === 100) return { label: "BLASTICO", bg: "#7c4dff", text: "#ffffff" };
-      if (s >= 94)  return { label: "JOYITA", bg: "#9c27b0", text: "#ffffff" };
-      if (s >= 86)  return { label: "ES UNA BANDAA", bg: "#2e7d32", text: "#ffffff" };
-      if (s >= 82)  return { label: "Primee", bg: "#43a047", text: "#ffffff" };
-      if (s >= 78)  return { label: "Lindaaaa", bg: "#66bb6a", text: "#0a0a0a" };
-      if (s >= 70)  return { label: "me gusta", bg: "#4caf50", text: "#0a0a0a" };
-      if (s >= 65)  return { label: "Esta bien", bg: "#cddc39", text: "#0a0a0a" };
-      if (s >= 60)  return { label: "Cumple", bg: "#fbc02d", text: "#0a0a0a" };
-      if (s >= 51)  return { label: "Normal", bg: "#ff9800", text: "#0a0a0a" };
-      if (s >= 41)  return { label: "No me gusta", bg: "#f57c00", text: "#ffffff" };
-      return { label: "Inescuchable", bg: "#d32f2f", text: "#ffffff" };
+      if (s === 100) return { label: "BLASTICO", bg: "#8257E5", text: "#ffffff" };
+      if (s >= 94)  return { label: "JOYITA", bg: "#9B4DCA", text: "#ffffff" };
+      if (s >= 86)  return { label: "ES UNA BANDAA", bg: "#2E8B57", text: "#ffffff" };
+      if (s >= 82)  return { label: "PRIMEE", bg: "#52B788", text: "#0D0C0A" };
+      if (s >= 78)  return { label: "LINDAAAA", bg: "#74C69D", text: "#0D0C0A" };
+      if (s >= 70)  return { label: "ME GUSTA", bg: "#56AB91", text: "#0D0C0A" };
+      if (s >= 65)  return { label: "ESTA BIEN", bg: "#CDDC39", text: "#0D0C0A" };
+      if (s >= 60)  return { label: "CUMPLE", bg: "#FBC02D", text: "#0D0C0A" };
+      if (s >= 51)  return { label: "NORMAL", bg: "#FF9800", text: "#0D0C0A" };
+      if (s >= 41)  return { label: "NO ME GUSTA", bg: "#F57C00", text: "#ffffff" };
+      return { label: "INESCUCHABLE", bg: "#D32F2F", text: "#ffffff" };
     }
 
     function calculateAlbumAverage(tracks) {
@@ -585,68 +582,70 @@
     }
 
     function renderGoldenShield(score, label) {
+      const isLongLabel = label.length > 9;
+      const labelSizeClass = isLongLabel
+        ? 'text-[8.5px] tracking-wider max-w-[96px]'
+        : 'text-[10.5px] tracking-widest max-w-[104px]';
+
       return `
-        <div class="relative flex flex-col items-center justify-center my-3 select-none" style="animation: badgePulse 0.4s ease;">
-          <svg viewBox="0 0 240 165" class="w-52 h-36 drop-shadow-[0_12px_22px_rgba(212,175,55,0.3)]">
+        <div class="relative flex flex-col items-center justify-center -mt-12 z-10 select-none">
+          <svg viewBox="0 0 260 190" class="w-[215px] h-[158px] drop-shadow-[0_12px_20px_rgba(0,0,0,0.95)]">
             <defs>
-              <linearGradient id="goldShieldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFF4BD"/>
-                <stop offset="35%" stop-color="#E5C158"/>
-                <stop offset="70%" stop-color="#B88E28"/>
-                <stop offset="100%" stop-color="#F7DC79"/>
+              <linearGradient id="exactRimOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFF5C0"/>
+                <stop offset="28%" stop-color="#E4BE5E"/>
+                <stop offset="55%" stop-color="#9B7523"/>
+                <stop offset="82%" stop-color="#F2D275"/>
+                <stop offset="100%" stop-color="#B0872D"/>
               </linearGradient>
-              <linearGradient id="goldLaurel" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#F7DC79"/>
-                <stop offset="50%" stop-color="#C89E32"/>
-                <stop offset="100%" stop-color="#8A6619"/>
+              <linearGradient id="exactRimInner" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#8F6B1E"/>
+                <stop offset="45%" stop-color="#F7DC84"/>
+                <stop offset="100%" stop-color="#A37C27"/>
               </linearGradient>
-              <linearGradient id="shieldInterior" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#22201D"/>
-                <stop offset="55%" stop-color="#141311"/>
-                <stop offset="100%" stop-color="#0A0A0B"/>
+              <linearGradient id="exactShieldFace" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#22201C"/>
+                <stop offset="40%" stop-color="#141311"/>
+                <stop offset="100%" stop-color="#090909"/>
+              </linearGradient>
+              <linearGradient id="exactLaurel" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F6DA7E"/>
+                <stop offset="50%" stop-color="#C99E38"/>
+                <stop offset="100%" stop-color="#87631A"/>
               </linearGradient>
             </defs>
 
-            <g fill="url(#goldLaurel)">
-              <path d="M56 122 C42 105, 36 80, 44 50" fill="none" stroke="url(#goldLaurel)" stroke-width="2.2" stroke-linecap="round"/>
-              <ellipse cx="45" cy="49" rx="8" ry="3.5" transform="rotate(-55 45 49)"/>
-              <ellipse cx="38" cy="62" rx="9" ry="3.8" transform="rotate(-35 38 62)"/>
-              <ellipse cx="50" cy="65" rx="7.5" ry="3.2" transform="rotate(20 50 65)"/>
-              <ellipse cx="36" cy="77" rx="9.5" ry="4" transform="rotate(-20 36 77)"/>
-              <ellipse cx="49" cy="80" rx="7.5" ry="3.2" transform="rotate(30 49 80)"/>
-              <ellipse cx="38" cy="93" rx="9.5" ry="4" transform="rotate(-5 38 93)"/>
-              <ellipse cx="51" cy="95" rx="7.5" ry="3.2" transform="rotate(42 51 95)"/>
-              <ellipse cx="44" cy="108" rx="9.5" ry="4" transform="rotate(15 44 108)"/>
-              <ellipse cx="56" cy="109" rx="7.5" ry="3.2" transform="rotate(55 56 109)"/>
-              <ellipse cx="54" cy="121" rx="9" ry="3.8" transform="rotate(32 54 121)"/>
-              <ellipse cx="67" cy="130" rx="8.5" ry="3.5" transform="rotate(42 67 130)"/>
+            <g fill="url(#exactLaurel)">
+              <path d="M98 175 C54 158, 36 112, 46 62" fill="none" stroke="url(#exactLaurel)" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M46 62 C41 51, 45 40, 52 36 C54 45, 52 55, 46 62 Z"/>
+              <path d="M44 78 C34 69, 33 56, 40 49 C45 57, 46 68, 44 78 Z"/>
+              <path d="M44 96 C32 88, 29 74, 35 66 C42 74, 44 85, 44 96 Z"/>
+              <path d="M47 115 C34 109, 29 95, 34 86 C42 93, 46 104, 47 115 Z"/>
+              <path d="M54 134 C40 130, 33 117, 37 107 C46 113, 52 123, 54 134 Z"/>
+              <path d="M66 151 C51 150, 42 139, 44 128 C55 132, 62 141, 66 151 Z"/>
+              <path d="M83 166 C68 168, 56 160, 56 149 C68 150, 77 157, 83 166 Z"/>
             </g>
 
-            <g fill="url(#goldLaurel)">
-              <path d="M184 122 C198 105, 204 80, 196 50" fill="none" stroke="url(#goldLaurel)" stroke-width="2.2" stroke-linecap="round"/>
-              <ellipse cx="195" cy="49" rx="8" ry="3.5" transform="rotate(55 195 49)"/>
-              <ellipse cx="202" cy="62" rx="9" ry="3.8" transform="rotate(35 202 62)"/>
-              <ellipse cx="190" cy="65" rx="7.5" ry="3.2" transform="rotate(-20 190 65)"/>
-              <ellipse cx="204" cy="77" rx="9.5" ry="4" transform="rotate(20 204 77)"/>
-              <ellipse cx="191" cy="80" rx="7.5" ry="3.2" transform="rotate(-30 191 80)"/>
-              <ellipse cx="202" cy="93" rx="9.5" ry="4" transform="rotate(5 202 93)"/>
-              <ellipse cx="189" cy="95" rx="7.5" ry="3.2" transform="rotate(-42 189 95)"/>
-              <ellipse cx="196" cy="108" rx="9.5" ry="4" transform="rotate(-15 196 108)"/>
-              <ellipse cx="184" cy="109" rx="7.5" ry="3.2" transform="rotate(-55 184 109)"/>
-              <ellipse cx="186" cy="121" rx="9" ry="3.8" transform="rotate(-32 186 121)"/>
-              <ellipse cx="173" cy="130" rx="8.5" ry="3.5" transform="rotate(-42 173 130)"/>
+            <g fill="url(#exactLaurel)">
+              <path d="M162 175 C206 158, 224 112, 214 62" fill="none" stroke="url(#exactLaurel)" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M214 62 C219 51, 215 40, 208 36 C206 45, 208 55, 214 62 Z"/>
+              <path d="M216 78 C226 69, 227 56, 220 49 C215 57, 214 68, 216 78 Z"/>
+              <path d="M216 96 C228 88, 231 74, 225 66 C218 74, 216 85, 216 96 Z"/>
+              <path d="M213 115 C226 109, 231 95, 226 86 C218 93, 214 104, 213 115 Z"/>
+              <path d="M206 134 C220 130, 227 117, 223 107 C214 113, 208 123, 206 134 Z"/>
+              <path d="M194 151 C209 150, 218 139, 216 128 C205 132, 198 141, 194 151 Z"/>
+              <path d="M177 166 C192 168, 204 160, 204 149 C192 150, 183 157, 177 166 Z"/>
             </g>
 
-            <path d="M120 12 L178 34 L178 86 C178 122 120 148 120 148 C120 148 62 122 62 86 L62 34 Z" 
-                  fill="url(#shieldInterior)" stroke="url(#goldShieldBorder)" stroke-width="6.5" stroke-linejoin="round"/>
-            
-            <path d="M120 20 L170 39 L170 85 C170 115 120 138 120 138 C120 138 70 115 70 85 L70 39 Z" 
-                  fill="none" stroke="url(#goldShieldBorder)" stroke-width="1.2" opacity="0.7"/>
+            <path d="M130 10 C152 24, 176 32, 201 33 C203 55, 202 82, 197 104 C189 138, 162 161, 130 176 C98 161, 71 138, 63 104 C58 82, 57 55, 59 33 C84 32, 108 24, 130 10 Z" fill="url(#exactRimOuter)"/>
+            <path d="M130 16 C150 29, 173 36, 195 38 C197 58, 196 82, 191 102 C184 133, 159 155, 130 169 C101 155, 76 133, 69 102 C64 82, 63 58, 65 38 C87 36, 110 29, 130 16 Z" fill="url(#exactRimInner)"/>
+            <path d="M130 21 C149 33, 170 40, 190 42 C192 60, 191 82, 186 100 C179 129, 156 149, 130 163 C104 149, 81 129, 74 100 C69 82, 68 60, 70 42 C90 40, 111 33, 130 21 Z" fill="url(#exactShieldFace)"/>
+            <path d="M130 26 C147 37, 167 43, 185 45 C187 62, 186 82, 181 99 C175 125, 154 144, 130 157 C106 144, 85 125, 79 99 C74 82, 73 62, 75 45 C93 43, 113 37, 130 26 Z" fill="none" stroke="#D8B454" stroke-width="1" opacity="0.55"/>
           </svg>
 
-          <div class="absolute inset-0 flex flex-col items-center justify-center pt-1 px-4 text-center">
-            <span class="text-3xl font-black text-white tracking-tight leading-none drop-shadow">${formatScore(score)}</span>
-            <span class="text-[10px] font-extrabold tracking-wider uppercase mt-1.5 text-[#E8C86B] leading-tight">${label}</span>
+          <div class="absolute inset-0 flex flex-col items-center justify-center -mt-2 text-center pointer-events-none">
+            <span class="text-[28px] font-black text-white tracking-tight leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">${formatScore(score)}</span>
+            <span class="${labelSizeClass} font-extrabold uppercase mt-1.5 text-[#E5C05C] leading-tight">${label}</span>
           </div>
         </div>
       `;
@@ -675,28 +674,36 @@
       document.getElementById('statPonedor').innerText = ponedorCount;
       document.getElementById('statTotalTracks').innerText = totalTracks;
 
-      const allGenres = ['Todos', ...new Set([
-        ...albums.map(a => a.genre).filter(Boolean),
-        ...singles.map(s => s.genre).filter(Boolean)
-      ])];
-
       const filtersEl = document.getElementById('genreFilters');
-      filtersEl.innerHTML = allGenres.map(g => {
-        const active = window.selectedGenre === g;
-        return `
-          <button type="button" onclick="setGenreFilter('${g}')" 
-                  class="px-3.5 py-1 rounded-full text-xs font-semibold transition cursor-pointer ${
-                    active 
-                      ? 'bg-yellow-500/15 text-yellow-300 border border-yellow-500/60' 
-                      : 'bg-neutral-900 text-neutral-400 border border-neutral-800 hover:border-neutral-600'
-                  }">
-            ${g === 'Todos' ? 'Todos los Géneros' : g}
-          </button>
-        `;
-      }).join('');
+      if (window.currentView === 'artists') {
+        filtersEl.classList.add('hidden');
+        filtersEl.innerHTML = '';
+      } else {
+        filtersEl.classList.remove('hidden');
+        const allGenres = ['Todos', ...new Set([
+          ...albums.map(a => a.genre).filter(Boolean),
+          ...singles.map(s => s.genre).filter(Boolean)
+        ])];
+
+        filtersEl.innerHTML = allGenres.map(g => {
+          const active = window.selectedGenre === g;
+          return `
+            <button type="button" onclick="setGenreFilter('${g}')" 
+                    class="px-3.5 py-1 rounded-full text-xs font-medium transition cursor-pointer ${
+                      active 
+                        ? 'bg-[#242016] text-[#E2BF60] border border-[#C9A24B]' 
+                        : 'bg-[#171719] text-neutral-400 border border-neutral-800 hover:border-neutral-600'
+                    }">
+              ${g === 'Todos' ? 'Todos los Géneros' : g}
+            </button>
+          `;
+        }).join('');
+      }
 
       if (window.currentView === 'albums') {
         renderAlbumsGrid(enrichedAlbums, query, sortBy);
+      } else if (window.currentView === 'ranking') {
+        renderAlbumsRankingList(enrichedAlbums, query, sortBy);
       } else if (window.currentView === 'singles') {
         renderSinglesList(singles, query, sortBy);
       } else if (window.currentView === 'artists') {
@@ -704,8 +711,7 @@
       }
     };
 
-    function renderAlbumsGrid(albums, query, sortBy) {
-      const grid = document.getElementById('albumsGrid');
+    function filterAndSortAlbums(albums, query, sortBy) {
       let filtered = albums.filter(a => {
         const matchesGenre = window.selectedGenre === 'Todos' || a.genre === window.selectedGenre;
         const trackMatch = (a.tracks || []).some(t => 
@@ -728,35 +734,88 @@
         return 0;
       });
 
+      return filtered;
+    }
+
+    function renderAlbumsGrid(albums, query, sortBy) {
+      const grid = document.getElementById('albumsGrid');
+      const filtered = filterAndSortAlbums(albums, query, sortBy);
+
       if (filtered.length === 0) {
         grid.innerHTML = `<div class="col-span-full text-center py-16 text-neutral-500 text-sm">No hay álbumes para mostrar.</div>`;
         return;
       }
 
-      grid.innerHTML = filtered.map((album, idx) => `
-        <div onclick="openAlbumDetail('${album.id}')" style="animation-delay: ${idx * 30}ms" 
-             class="glass-card overflow-hidden cursor-pointer group flex flex-col animate-card">
+      grid.innerHTML = filtered.map((album) => `
+        <div onclick="openAlbumDetail('${album.id}')" 
+             class="album-card overflow-hidden cursor-pointer group flex flex-col">
           <div class="relative aspect-square overflow-hidden bg-neutral-900">
             <img src="${album.cover || DEFAULT_COVER}" alt="${album.title}" 
                  onerror="this.src='${DEFAULT_COVER}'"
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-            <span class="absolute bottom-2.5 right-2.5 bg-black/85 border border-yellow-500/50 text-white font-black text-xs px-2.5 py-1 rounded-lg backdrop-blur-md shadow-lg">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent"></div>
+            <span class="absolute bottom-2 right-2 bg-black/85 border border-[#C9A24B]/60 text-white font-black text-xs px-2 py-0.5 rounded-md backdrop-blur-md">
               ${formatScore(album.avg)}
             </span>
           </div>
-          <div class="p-3.5 flex-1 flex flex-col justify-between">
+          <div class="p-3 flex-1 flex flex-col justify-between">
             <div>
-              <h3 class="font-bold text-white text-sm truncate group-hover:text-yellow-300 transition">${album.title}</h3>
-              <p class="text-xs text-neutral-400 truncate mt-0.5">${album.artist}</p>
+              <h3 class="font-bold text-white text-xs truncate group-hover:text-[#E2BF60] transition">${album.title}</h3>
+              <p class="text-[11px] text-neutral-400 truncate mt-0.5">${album.artist}</p>
             </div>
-            <div class="flex items-center justify-between mt-3 pt-2 border-t border-neutral-800/80 text-[11px] text-neutral-500">
-              <span>${album.genre || 'Sin género'}</span>
+            <div class="flex items-center justify-between mt-2 pt-2 border-t border-neutral-800/80 text-[10px] text-neutral-500">
+              <span>${album.genre || ''}</span>
               <span>${album.year || ''}</span>
             </div>
           </div>
         </div>
       `).join('');
+    }
+
+    function renderAlbumsRankingList(albums, query, sortBy) {
+      const container = document.getElementById('albumsRankingList');
+      const filtered = filterAndSortAlbums(albums, query, sortBy);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="text-center py-16 text-neutral-500 text-sm">No hay álbumes para mostrar en este filtro.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map((album, index) => {
+        const rating = getAlbumRatingInfo(album.avg);
+        const trackCount = (album.tracks || []).length;
+        const rankNumber = index + 1;
+        const rankBadgeStyle = rankNumber === 1
+          ? 'bg-gradient-to-br from-[#F7DC84] to-[#B48D36] text-[#0D0C0A] border-[#FFF2B2]'
+          : rankNumber === 2
+          ? 'bg-neutral-200 text-[#0D0C0A] border-white'
+          : rankNumber === 3
+          ? 'bg-amber-700/80 text-amber-100 border-amber-500/60'
+          : 'bg-[#131315] text-[#E2BF60] border-[#C9A24B]/50';
+
+        return `
+          <div onclick="openAlbumDetail('${album.id}')" class="track-item-row p-3.5 flex items-center justify-between gap-4 cursor-pointer group">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <span class="w-9 h-9 shrink-0 rounded-full border font-black text-xs flex items-center justify-center shadow ${rankBadgeStyle}">
+                #${rankNumber}
+              </span>
+              <img src="${album.cover || DEFAULT_COVER}" onerror="this.src='${DEFAULT_COVER}'" class="w-12 h-12 shrink-0 rounded-lg object-cover border border-neutral-800">
+              <div class="min-w-0">
+                <h4 class="font-bold text-white text-sm truncate group-hover:text-[#E2BF60] transition">${album.title}</h4>
+                <p class="text-xs text-neutral-400 truncate">
+                  <span class="text-[#E2BF60]/90 font-medium">${album.artist}</span> • 
+                  <span class="text-neutral-500">${album.genre || 'Sin género'}${album.year ? ' • ' + album.year : ''} • ${trackCount} ${trackCount === 1 ? 'canción' : 'canciones'}</span>
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold shadow" style="background-color: ${rating.bg}; color: ${rating.text};">
+                ${formatScore(album.avg)} (${rating.label})
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     function renderSinglesList(singles, query, sortBy) {
@@ -783,14 +842,14 @@
         return;
       }
 
-      container.innerHTML = filtered.map((s, idx) => {
+      container.innerHTML = filtered.map((s) => {
         const rating = getTrackRatingInfo(s.score);
         const ftFormatted = formatFtDisplay(s.ft);
         const ftText = ftFormatted ? `<span class="text-neutral-400 font-normal">(ft. ${ftFormatted})</span>` : '';
         return `
-          <div style="animation-delay: ${idx * 30}ms" class="glass-card p-3.5 flex items-center justify-between gap-4 animate-card">
+          <div class="track-item-row p-3.5 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3.5 min-w-0">
-              <img src="${s.cover || DEFAULT_COVER}" onerror="this.src='${DEFAULT_COVER}'" class="w-12 h-12 rounded-xl object-cover border border-neutral-800">
+              <img src="${s.cover || DEFAULT_COVER}" onerror="this.src='${DEFAULT_COVER}'" class="w-12 h-12 rounded-lg object-cover border border-neutral-800">
               <div class="min-w-0">
                 <h4 class="font-bold text-white text-sm truncate">${s.title} ${ftText}</h4>
                 <p class="text-xs text-neutral-400 truncate">${s.artist} • <span class="text-neutral-500">${s.genre || ''} ${s.year ? '• ' + s.year : ''}</span></p>
@@ -872,19 +931,19 @@
       }
 
       container.innerHTML = artistsArray.map((artist, index) => `
-        <div style="animation-delay: ${index * 25}ms" class="glass-card p-4 flex items-center justify-between animate-card">
+        <div class="track-item-row p-4 flex items-center justify-between">
           <div class="flex items-center gap-4">
-            <span class="w-8 h-8 rounded-full bg-neutral-900 border border-yellow-500/40 text-yellow-400 font-black text-xs flex items-center justify-center">
+            <span class="w-8 h-8 rounded-full bg-[#131315] border border-[#C9A24B]/50 text-[#E2BF60] font-black text-xs flex items-center justify-center">
               #${index + 1}
             </span>
             <div>
-              <h4 class="font-bold text-white text-base">${artist.name}</h4>
+              <h4 class="font-bold text-white text-sm">${artist.name}</h4>
               <p class="text-xs text-neutral-400">${artist.count} ${artist.count === 1 ? 'participación rankeada' : 'participaciones rankeadas'}</p>
             </div>
           </div>
           <div class="text-right">
-            <span class="text-lg font-black text-white">${formatScore(artist.avg)}</span>
-            <span class="text-xs font-semibold text-neutral-400 ml-1">(Feeling)</span>
+            <span class="text-base font-black text-white">${formatScore(artist.avg)}</span>
+            <span class="text-xs text-neutral-400 ml-1">(Feeling)</span>
           </div>
         </div>
       `).join('');
@@ -903,12 +962,12 @@
         const ftFormatted = formatFtDisplay(t.ft);
         const ftLabel = ftFormatted ? `<span class="text-neutral-400 font-normal text-xs ml-1">(ft. ${ftFormatted})</span>` : '';
         return `
-          <div class="track-row flex items-center justify-between bg-neutral-900/75 border border-neutral-800/90 px-4 py-2.5 rounded-xl">
-            <div class="flex items-center gap-3 min-w-0 pr-3">
-              <span class="text-neutral-500 font-bold text-xs w-5">${i + 1}.</span>
-              <span class="text-sm font-medium text-neutral-100 truncate">${getTrackName(t)} ${ftLabel}</span>
+          <div class="track-item-row flex items-center justify-between px-4 py-2.5">
+            <div class="flex items-center gap-2.5 min-w-0 pr-3">
+              <span class="text-neutral-400 font-bold text-xs w-5">${i + 1}.</span>
+              <span class="text-xs md:text-sm font-semibold text-white truncate">${getTrackName(t)} ${ftLabel}</span>
             </div>
-            <span class="score-pill shrink-0 px-3 py-1 rounded-full text-xs font-extrabold shadow-sm" style="background-color: ${r.bg}; color: ${r.text};">
+            <span class="shrink-0 px-3.5 py-1 rounded-full text-[11px] font-extrabold shadow-sm" style="background-color: ${r.bg}; color: ${r.text};">
               ${formatScore(t.score)} (${r.label})
             </span>
           </div>
@@ -916,50 +975,43 @@
       }).join('') : `<p class="text-neutral-500 text-sm">Este álbum no tiene canciones registradas.</p>`;
 
       document.getElementById('detailModalContent').innerHTML = `
-        <div class="flex items-center justify-between mb-5 pb-3 border-b border-neutral-800/80">
-          <span class="text-[11px] uppercase tracking-widest text-neutral-500 font-bold">Ficha del Álbum</span>
-          <div class="flex items-center gap-6">
-            ${!window.isReadOnly ? `
-              <div class="flex items-center gap-2.5">
-                <button type="button" onclick="openEditModal('${album.id}')" class="px-3.5 py-1.5 rounded-full bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-xs font-semibold text-white flex items-center gap-1.5 transition cursor-pointer">
-                  <i class="fa-solid fa-pen text-yellow-400"></i> Editar Álbum
-                </button>
-                <button type="button" onclick="deleteAlbumFromFirebase('${album.id}')" class="w-8 h-8 rounded-full bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 flex items-center justify-center transition cursor-pointer" title="Eliminar álbum">
-                  <i class="fa-solid fa-trash text-xs"></i>
-                </button>
-              </div>
-            ` : ''}
-            <button type="button" onclick="toggleModal('detailModal')" class="w-9 h-9 rounded-full bg-neutral-800/90 hover:bg-neutral-700 text-neutral-300 hover:text-white flex items-center justify-center transition ml-2 cursor-pointer" title="Cerrar">
-              <i class="fa-solid fa-xmark text-base"></i>
+        <div class="flex items-center justify-end gap-3 mb-2">
+          ${!window.isReadOnly ? `
+            <button type="button" onclick="openEditModal('${album.id}')" class="px-3.5 py-1.5 rounded-full bg-[#222024] hover:bg-[#2C292F] border border-neutral-700 text-xs font-semibold text-neutral-200 flex items-center gap-1.5 transition cursor-pointer">
+              <i class="fa-solid fa-pen text-[11px] text-neutral-300"></i> Editar Álbum
             </button>
-          </div>
+            <button type="button" onclick="deleteAlbumFromFirebase('${album.id}')" class="w-8 h-8 rounded-lg bg-[#222024] hover:bg-red-500/20 border border-neutral-700 hover:border-red-500/40 text-neutral-300 hover:text-red-400 flex items-center justify-center transition cursor-pointer" title="Eliminar álbum">
+              <i class="fa-regular fa-trash-can text-xs"></i>
+            </button>
+          ` : ''}
+          <button type="button" onclick="toggleModal('detailModal')" class="w-8 h-8 rounded-full text-neutral-300 hover:text-white flex items-center justify-center transition cursor-pointer" title="Cerrar">
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
         </div>
 
-        <div class="flex flex-col md:flex-row gap-7">
-          <div class="w-full md:w-56 shrink-0 flex flex-col items-center">
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="w-full md:w-[235px] shrink-0 flex flex-col items-center">
             <img src="${album.cover || DEFAULT_COVER}" onerror="this.src='${DEFAULT_COVER}'" 
-                 class="w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover border border-neutral-700/80 shadow-2xl">
+                 class="w-[215px] h-[215px] md:w-[235px] md:h-[235px] rounded-xl object-cover border border-neutral-700/80 shadow-2xl">
             
             ${renderGoldenShield(avg, albumRating.label)}
 
-            ${window.isReadOnly ? `
-              <button type="button" onclick="copyAlbumToClipboard('${album.id}')" 
-                      class="gold-btn w-full py-2.5 px-3 rounded-xl text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 mt-1 cursor-pointer">
-                <i class="fa-solid fa-copy"></i> Copiar álbum a mi ranking
-              </button>
-            ` : ''}
+            <button type="button" onclick="copyAlbumToClipboard('${album.id}')" 
+                    class="gold-pill-btn w-full py-2.5 px-3 rounded-full text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 mt-1 cursor-pointer">
+              ${window.isReadOnly ? 'COPIAR ÁLBUM A MI RANKING' : 'DUPLICAR ÁLBUM EN MI RANKING'}
+            </button>
           </div>
 
           <div class="flex-1 min-w-0">
-            <h2 class="text-2xl md:text-3xl font-black text-white leading-tight">${album.title}</h2>
-            <p class="text-base font-bold text-[#E6C770] mt-1">${album.artist}</p>
+            <h2 class="text-2xl md:text-[28px] font-black text-white leading-tight">${album.title}</h2>
+            <p class="text-base font-bold text-[#E2BF60] mt-1">${album.artist}</p>
             <p class="text-xs text-neutral-400 mt-0.5">${album.genre || 'Sin género'} ${album.year ? '• ' + album.year : ''}</p>
 
             <div class="mt-5">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-3">
-                Canciones (${tracks.length})
+              <h4 class="text-xs font-bold uppercase tracking-wider text-[#B99746] mb-3">
+                CANCIONES (${tracks.length})
               </h4>
-              <div class="space-y-2 max-h-[340px] overflow-y-auto pr-1.5">
+              <div class="tracks-scroll space-y-2 max-h-[340px] overflow-y-auto pr-2">
                 ${tracksHtml}
               </div>
             </div>
@@ -970,7 +1022,6 @@
       window.toggleModal('detailModal');
     };
 
-    // CHIPS DE MÚLTIPLES ARTISTAS FT.
     function renderFtChipsInsideRow(rowElement, artistsArray) {
       const chipsContainer = rowElement.querySelector('.ft-chips-container');
       rowElement.dataset.ftList = JSON.stringify(artistsArray);
@@ -1022,6 +1073,11 @@
     };
 
     window.openAddModal = function() {
+      if (!window.currentUser) {
+        window.showToast("Inicia sesión primero para añadir álbumes.");
+        window.toggleModal('loginModal');
+        return;
+      }
       document.getElementById('formModalTitle').innerText = "Añadir Nuevo Álbum";
       document.getElementById('editAlbumId').value = "";
       document.getElementById('albumForm').reset();
@@ -1053,15 +1109,15 @@
     window.addTrackInput = function(name = "", ft = [], score = "") {
       const container = document.getElementById('tracksInputContainer');
       const div = document.createElement('div');
-      div.className = "track-form-row bg-neutral-900/70 border border-neutral-800 rounded-2xl p-2.5 space-y-2";
+      div.className = "track-form-row bg-[#131315] border border-neutral-800 rounded-xl p-2.5 space-y-2";
       div.dataset.ftList = "[]";
 
       div.innerHTML = `
         <div class="flex items-center gap-2">
           <input type="text" placeholder="Nombre del tema *" value="${name === 'Tema sin nombre' ? '' : name}" required 
-                 class="track-name flex-1 bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-1.5 text-xs text-white focus:border-yellow-500 focus:outline-none">
+                 class="track-name flex-1 bg-[#0C0C0E] border border-neutral-700 rounded-lg px-3 py-1.5 text-xs text-white focus:border-[#C9A24B] focus:outline-none">
           <input type="number" placeholder="Pts" min="1" max="100" step="0.01" value="${score}" required 
-                 class="track-score w-16 bg-neutral-950 border border-neutral-700 rounded-xl px-2 py-1.5 text-xs text-white text-center font-bold focus:border-yellow-500 focus:outline-none">
+                 class="track-score w-16 bg-[#0C0C0E] border border-neutral-700 rounded-lg px-2 py-1.5 text-xs text-white text-center font-bold focus:border-[#C9A24B] focus:outline-none">
           <button type="button" onclick="this.closest('.track-form-row').remove()" class="text-neutral-500 hover:text-red-400 px-1.5 cursor-pointer" title="Quitar canción">
             <i class="fa-solid fa-trash text-xs"></i>
           </button>
@@ -1072,8 +1128,8 @@
           <div class="flex items-center gap-1 flex-1 min-w-[140px]">
             <input type="text" placeholder="Añadir artista invitado..." 
                    onkeydown="handleTrackFtKeydown(event, this)"
-                   class="track-ft-input flex-1 bg-neutral-950 border border-neutral-800 rounded-lg px-2 py-1 text-[11px] text-neutral-200 focus:border-yellow-500 focus:outline-none">
-            <button type="button" onclick="addTrackFtFromBtn(this)" class="px-2 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-yellow-400 text-[10px] font-bold cursor-pointer">
+                   class="track-ft-input flex-1 bg-[#0C0C0E] border border-neutral-800 rounded-lg px-2 py-1 text-[11px] text-neutral-200 focus:border-[#C9A24B] focus:outline-none">
+            <button type="button" onclick="addTrackFtFromBtn(this)" class="px-2 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-[#E2BF60] text-[10px] font-bold cursor-pointer">
               + Artista
             </button>
           </div>
@@ -1116,7 +1172,9 @@
         tracks
       };
 
-      await window.saveAlbumToFirebase(albumData, id || null);
+      if (window.saveAlbumToFirebase) {
+        await window.saveAlbumToFirebase(albumData, id || null);
+      }
       window.toggleModal('albumFormModal');
       window.showToast(id ? "Álbum actualizado" : "Álbum guardado");
     };
@@ -1156,6 +1214,11 @@
     };
 
     window.openSingleModal = function(singleId = null) {
+      if (!window.currentUser) {
+        window.showToast("Inicia sesión primero para añadir sencillos.");
+        window.toggleModal('loginModal');
+        return;
+      }
       document.getElementById('singleForm').reset();
       document.getElementById('editSingleId').value = "";
       document.getElementById('singleModalTitle').innerText = "Rankear Sencillo";
@@ -1195,7 +1258,9 @@
         cover: document.getElementById('singleCoverUrl').value.trim() || DEFAULT_COVER
       };
 
-      await window.saveSingleToFirebase(singleData, id || null);
+      if (window.saveSingleToFirebase) {
+        await window.saveSingleToFirebase(singleData, id || null);
+      }
       window.toggleModal('singleFormModal');
       window.showToast(id ? "Sencillo actualizado" : "Sencillo guardado");
     };
@@ -1210,233 +1275,287 @@
       reader.readAsDataURL(file);
     };
 
-    // Inicializar guía y vista base de inmediato
+    window.toggleAuth = function() {
+      window.toggleModal('loginModal');
+    };
+    window.shareProfile = function() {
+      window.showToast("Inicia sesión primero para obtener tu enlace público.");
+    };
+
     window.switchGuideTab('albums');
     window.renderApp();
+  </script>
 
-    // --- CONEXIÓN CON FIREBASE ---
-    try {
-      const firebaseConfig = {
-        apiKey: "AIzaSyDNG0QICIscO7dpKVgr_mgoBgXOVnR-lOU",
-        authDomain: "ranking-blastico-698d8.firebaseapp.com",
-        databaseURL: "https://ranking-blastico-698d8-default-rtdb.firebaseio.com",
-        projectId: "ranking-blastico-698d8",
-        storageBucket: "ranking-blastico-698d8.appspot.com",
-        messagingSenderId: "650938268028",
-        appId: "1:650938268028:web:d175c147ce0c748d31ccf9"
-      };
+  <!-- SCRIPT 2: FIREBASE MODULAR INDEPENDIENTE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getDatabase, ref, onValue, push, set, remove, update 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { 
+      getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, 
+      signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-      const auth = getAuth(app);
-      const googleProvider = new GoogleAuthProvider();
+    const firebaseConfig = {
+      apiKey: "AIzaSyDNG0QICIscO7dpKVgr_mgoBgXOVnR-lOU",
+      authDomain: "ranking-blastico-698d8.firebaseapp.com",
+      databaseURL: "https://ranking-blastico-698d8-default-rtdb.firebaseio.com",
+      projectId: "ranking-blastico-698d8",
+      storageBucket: "ranking-blastico-698d8.appspot.com",
+      messagingSenderId: "650938268028",
+      appId: "1:650938268028:web:d175c147ce0c748d31ccf9"
+    };
 
-      const urlParams = new URLSearchParams(window.location.search);
-      const sharedUser = urlParams.get('user');
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+    const googleProvider = new GoogleAuthProvider();
 
-      onAuthStateChanged(auth, (user) => {
-        window.currentUser = user;
-        const authBtn = document.getElementById('authBtn');
-        const userActionsBar = document.getElementById('userActionsBar');
-        const shareBtn = document.getElementById('shareBtn');
-        const banner = document.getElementById('viewModeBanner');
+    const urlParams = new URLSearchParams(window.location.search);
+    const sharedUser = urlParams.get('user');
 
-        if (sharedUser) {
-          window.isReadOnly = true;
-          window.targetUid = sharedUser;
-          authBtn.innerHTML = user ? `<i class="fa-solid fa-right-from-bracket"></i> Salir` : `<i class="fa-solid fa-lock"></i> Iniciar Sesión`;
-          userActionsBar.classList.add('hidden');
-          shareBtn.classList.add('hidden');
-          banner.classList.remove('hidden');
-          document.getElementById('headerSubtitle').innerText = "Perfil de Tercero (Modo Lectura)";
-        } else if (user) {
-          window.isReadOnly = false;
-          window.targetUid = user.uid;
-          authBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> Salir`;
-          userActionsBar.classList.remove('hidden');
-          shareBtn.classList.remove('hidden');
-          shareBtn.classList.add('flex');
-          banner.classList.add('hidden');
-          document.getElementById('headerSubtitle').innerText = `Mi Catálogo (${user.email || user.displayName})`;
-          window.checkCopiedAlbum();
-        } else {
-          window.isReadOnly = true;
-          window.targetUid = null;
-          authBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Iniciar Sesión / Registrarse`;
-          userActionsBar.classList.add('hidden');
-          shareBtn.classList.add('hidden');
-          banner.classList.add('hidden');
-          document.getElementById('headerSubtitle').innerText = "Inicia sesión para gestionar tu ranking";
-        }
+    onAuthStateChanged(auth, (user) => {
+      window.currentUser = user;
+      const authBtn = document.getElementById('authBtn');
+      const addSingleTopBtn = document.getElementById('addSingleTopBtn');
+      const addAlbumTopBtn = document.getElementById('addAlbumTopBtn');
+      const lockBadgeIcon = document.getElementById('lockBadgeIcon');
+      const copyFullRankingBtn = document.getElementById('copyFullRankingBtn');
+      const goMyRankingBtn = document.getElementById('goMyRankingBtn');
 
-        loadUserData();
-      });
-
-      function loadUserData() {
-        if (!window.targetUid) {
-          window.albums = [];
-          window.singles = [];
-          window.renderApp();
-          return;
-        }
-
-        const userAlbumsRef = ref(db, `users/${window.targetUid}/albums`);
-        onValue(userAlbumsRef, (snapshot) => {
-          const data = snapshot.val();
-          window.albums = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
-          window.renderApp();
-        });
-
-        const userSinglesRef = ref(db, `users/${window.targetUid}/singles`);
-        onValue(userSinglesRef, (snapshot) => {
-          const data = snapshot.val();
-          window.singles = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
-          window.renderApp();
-        });
+      if (sharedUser) {
+        window.isReadOnly = true;
+        window.targetUid = sharedUser;
+        authBtn.innerText = user ? "Salir" : "Iniciar Sesión / Registrarse";
+        addSingleTopBtn.classList.add('opacity-45');
+        addAlbumTopBtn.classList.add('opacity-45');
+        lockBadgeIcon.classList.remove('hidden');
+        copyFullRankingBtn.classList.remove('hidden');
+        goMyRankingBtn.classList.remove('hidden');
+        document.getElementById('headerSubtitle').innerText = `Perfil de Tercero (modo lectura${user ? ' - ' + user.email : ''})`;
+      } else if (user) {
+        window.isReadOnly = false;
+        window.targetUid = user.uid;
+        authBtn.innerText = "Salir";
+        addSingleTopBtn.classList.remove('opacity-45');
+        addAlbumTopBtn.classList.remove('opacity-45');
+        lockBadgeIcon.classList.add('hidden');
+        copyFullRankingBtn.classList.add('hidden');
+        goMyRankingBtn.classList.add('hidden');
+        document.getElementById('headerSubtitle').innerText = `Mi Catálogo (${user.email || user.displayName})`;
+        window.checkCopiedAlbum();
+      } else {
+        window.isReadOnly = true;
+        window.targetUid = null;
+        authBtn.innerText = "Iniciar Sesión / Registrarse";
+        addSingleTopBtn.classList.add('opacity-45');
+        addAlbumTopBtn.classList.add('opacity-45');
+        lockBadgeIcon.classList.remove('hidden');
+        copyFullRankingBtn.classList.add('hidden');
+        goMyRankingBtn.classList.add('hidden');
+        document.getElementById('headerSubtitle').innerText = "Inicia sesión para gestionar tu ranking";
       }
 
-      window.copyAlbumToClipboard = async (albumId) => {
-        const album = window.albums.find(a => a.id === albumId);
-        if (!album) return;
-        const { id, ...cleanAlbum } = album;
+      loadUserData();
+    });
 
-        if (window.currentUser) {
-          try {
-            const myAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
-            await set(push(myAlbumsRef), cleanAlbum);
-            window.showToast(`¡"${album.title}" guardado en tu cuenta! Tocá "Ir a mi cuenta" para editar las notas.`);
-          } catch (err) {
-            localStorage.setItem('rb_copied_album', JSON.stringify(cleanAlbum));
-            window.showToast(`"${album.title}" copiado. Ve a tu cuenta para pegarlo.`);
-          }
-        } else {
+    function loadUserData() {
+      if (!window.targetUid) {
+        window.albums = [];
+        window.singles = [];
+        window.renderApp();
+        return;
+      }
+
+      const userAlbumsRef = ref(db, `users/${window.targetUid}/albums`);
+      onValue(userAlbumsRef, (snapshot) => {
+        const data = snapshot.val();
+        window.albums = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+        window.renderApp();
+      });
+
+      const userSinglesRef = ref(db, `users/${window.targetUid}/singles`);
+      onValue(userSinglesRef, (snapshot) => {
+        const data = snapshot.val();
+        window.singles = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+        window.renderApp();
+      });
+    }
+
+    window.copyAlbumToClipboard = async (albumId) => {
+      const album = window.albums.find(a => a.id === albumId);
+      if (!album) return;
+      const { id, ...cleanAlbum } = album;
+
+      if (window.currentUser) {
+        try {
+          const myAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
+          await set(push(myAlbumsRef), cleanAlbum);
+          window.showToast(`¡"${album.title}" guardado en tu ranking!`);
+        } catch (err) {
           localStorage.setItem('rb_copied_album', JSON.stringify(cleanAlbum));
-          window.showToast(`"${album.title}" copiado. Inicia sesión en tu cuenta para pegarlo y editarlo.`);
+          window.showToast(`"${album.title}" copiado. Ve a tu cuenta para pegarlo.`);
         }
-      };
+      } else {
+        localStorage.setItem('rb_copied_album', JSON.stringify(cleanAlbum));
+        window.showToast(`"${album.title}" copiado. Inicia sesión para guardarlo en tu cuenta.`);
+        window.toggleModal('detailModal');
+        window.toggleModal('loginModal');
+      }
+    };
 
-      window.checkCopiedAlbum = () => {
-        const raw = localStorage.getItem('rb_copied_album');
-        const btn = document.getElementById('pasteAlbumBtn');
-        const badge = document.getElementById('copiedAlbumNameBadge');
-        if (raw && !window.isReadOnly && window.currentUser) {
-          try {
-            const parsed = JSON.parse(raw);
-            badge.innerText = parsed.title;
-            btn.classList.remove('hidden');
-          } catch (e) {
-            btn.classList.add('hidden');
-          }
-        } else {
+    window.copyFullRankingToAccount = async () => {
+      if (!window.currentUser) {
+        window.showToast("Inicia sesión en tu cuenta para copiar este ranking.");
+        window.toggleModal('loginModal');
+        return;
+      }
+      if (window.albums.length === 0 && window.singles.length === 0) {
+        window.showToast("No hay álbumes ni sencillos para copiar.");
+        return;
+      }
+      if (!confirm(`¿Quieres copiar los ${window.albums.length} álbumes y ${window.singles.length} sencillos de este perfil a tu cuenta?`)) {
+        return;
+      }
+      try {
+        const myAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
+        for (const album of window.albums) {
+          const { id, ...cleanAlbum } = album;
+          await set(push(myAlbumsRef), cleanAlbum);
+        }
+        const mySinglesRef = ref(db, `users/${window.currentUser.uid}/singles`);
+        for (const single of window.singles) {
+          const { id, ...cleanSingle } = single;
+          await set(push(mySinglesRef), cleanSingle);
+        }
+        window.showToast("¡Ranking completo copiado a tu cuenta!");
+      } catch (err) {
+        alert("Error al copiar ranking: " + err.message);
+      }
+    };
+
+    window.checkCopiedAlbum = () => {
+      const raw = localStorage.getItem('rb_copied_album');
+      const btn = document.getElementById('pasteAlbumBtn');
+      const badge = document.getElementById('copiedAlbumNameBadge');
+      if (raw && !window.isReadOnly && window.currentUser) {
+        try {
+          const parsed = JSON.parse(raw);
+          badge.innerText = parsed.title;
+          btn.classList.remove('hidden');
+        } catch (e) {
           btn.classList.add('hidden');
         }
-      };
+      } else {
+        btn.classList.add('hidden');
+      }
+    };
 
-      window.pasteCopiedAlbum = async () => {
-        if (window.isReadOnly || !window.currentUser) return;
-        const raw = localStorage.getItem('rb_copied_album');
-        if (!raw) return;
-        try {
-          const albumData = JSON.parse(raw);
-          await window.saveAlbumToFirebase(albumData, null);
-          localStorage.removeItem('rb_copied_album');
-          window.checkCopiedAlbum();
-          window.showToast(`¡Álbum "${albumData.title}" agregado a tu catálogo!`);
-        } catch (err) {
-          alert("Error al pegar el álbum: " + err.message);
-        }
-      };
+    window.pasteCopiedAlbum = async () => {
+      if (window.isReadOnly || !window.currentUser) return;
+      const raw = localStorage.getItem('rb_copied_album');
+      if (!raw) return;
+      try {
+        const albumData = JSON.parse(raw);
+        await window.saveAlbumToFirebase(albumData, null);
+        localStorage.removeItem('rb_copied_album');
+        window.checkCopiedAlbum();
+        window.showToast(`¡Álbum "${albumData.title}" agregado a tu catálogo!`);
+      } catch (err) {
+        alert("Error al pegar el álbum: " + err.message);
+      }
+    };
 
-      window.saveAlbumToFirebase = async (albumData, id) => {
-        if (window.isReadOnly || !window.currentUser) {
-          alert("No tienes permisos para modificar este catálogo.");
-          return;
-        }
-        const userAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
-        if (id) {
-          await update(ref(db, `users/${window.currentUser.uid}/albums/${id}`), albumData);
-        } else {
-          await set(push(userAlbumsRef), albumData);
-        }
-      };
+    window.saveAlbumToFirebase = async (albumData, id) => {
+      if (window.isReadOnly || !window.currentUser) {
+        alert("Inicia sesión en tu cuenta para guardar cambios.");
+        return;
+      }
+      const userAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
+      if (id) {
+        await update(ref(db, `users/${window.currentUser.uid}/albums/${id}`), albumData);
+      } else {
+        await set(push(userAlbumsRef), albumData);
+      }
+    };
 
-      window.deleteAlbumFromFirebase = async (id) => {
-        if (window.isReadOnly || !window.currentUser) return;
-        if (confirm("¿Seguro que quieres eliminar este álbum?")) {
-          await remove(ref(db, `users/${window.currentUser.uid}/albums/${id}`));
-          window.toggleModal('detailModal');
-          window.showToast("Álbum eliminado");
-        }
-      };
+    window.deleteAlbumFromFirebase = async (id) => {
+      if (window.isReadOnly || !window.currentUser) return;
+      if (confirm("¿Seguro que quieres eliminar este álbum?")) {
+        await remove(ref(db, `users/${window.currentUser.uid}/albums/${id}`));
+        window.toggleModal('detailModal');
+        window.showToast("Álbum eliminado");
+      }
+    };
 
-      window.saveSingleToFirebase = async (singleData, id) => {
-        if (window.isReadOnly || !window.currentUser) return;
-        const userSinglesRef = ref(db, `users/${window.currentUser.uid}/singles`);
-        if (id) {
-          await update(ref(db, `users/${window.currentUser.uid}/singles/${id}`), singleData);
-        } else {
-          await set(push(userSinglesRef), singleData);
-        }
-      };
+    window.saveSingleToFirebase = async (singleData, id) => {
+      if (window.isReadOnly || !window.currentUser) return;
+      const userSinglesRef = ref(db, `users/${window.currentUser.uid}/singles`);
+      if (id) {
+        await update(ref(db, `users/${window.currentUser.uid}/singles/${id}`), singleData);
+      } else {
+        await set(push(userSinglesRef), singleData);
+      }
+    };
 
-      window.deleteSingleFromFirebase = async (id) => {
-        if (window.isReadOnly || !window.currentUser) return;
-        if (confirm("¿Eliminar este sencillo?")) {
-          await remove(ref(db, `users/${window.currentUser.uid}/singles/${id}`));
-          window.showToast("Sencillo eliminado");
-        }
-      };
+    window.deleteSingleFromFirebase = async (id) => {
+      if (window.isReadOnly || !window.currentUser) return;
+      if (confirm("¿Eliminar este sencillo?")) {
+        await remove(ref(db, `users/${window.currentUser.uid}/singles/${id}`));
+        window.showToast("Sencillo eliminado");
+      }
+    };
 
-      window.shareProfile = () => {
-        if (!window.currentUser) return;
-        const profileUrl = `${window.location.origin}${window.location.pathname}?user=${window.currentUser.uid}`;
-        navigator.clipboard.writeText(profileUrl);
-        window.showToast("Enlace de perfil público copiado al portapapeles");
-      };
+    window.shareProfile = () => {
+      if (!window.currentUser) {
+        window.showToast("Inicia sesión primero para obtener tu enlace público.");
+        return;
+      }
+      const profileUrl = `${window.location.origin}${window.location.pathname}?user=${window.currentUser.uid}`;
+      navigator.clipboard.writeText(profileUrl);
+      window.showToast("Enlace de perfil público copiado al portapapeles");
+    };
 
-      window.loginWithGoogle = async () => {
-        try {
-          await signInWithPopup(auth, googleProvider);
-          window.toggleModal('loginModal');
-        } catch (err) {
-          alert("Error al iniciar con Google: " + err.message);
-        }
-      };
+    window.loginWithGoogle = async () => {
+      try {
+        await signInWithPopup(auth, googleProvider);
+        window.toggleModal('loginModal');
+      } catch (err) {
+        alert("Error al iniciar con Google: " + err.message);
+      }
+    };
 
-      window.handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-          await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
-          window.toggleModal('loginModal');
-        } catch (err) {
-          alert("Error al iniciar sesión: " + err.message);
-        }
-      };
+    window.handleLogin = async (e) => {
+      e.preventDefault();
+      try {
+        await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
+        window.toggleModal('loginModal');
+      } catch (err) {
+        alert("Error al iniciar sesión: " + err.message);
+      }
+    };
 
-      window.handleRegister = async (e) => {
-        e.preventDefault();
-        try {
-          await createUserWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
-          window.showToast("¡Cuenta creada con éxito!");
-          window.toggleModal('loginModal');
-        } catch (err) {
-          alert("Error al registrarse: " + err.message);
-        }
-      };
+    window.handleRegister = async (e) => {
+      e.preventDefault();
+      try {
+        await createUserWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
+        window.showToast("¡Cuenta creada con éxito!");
+        window.toggleModal('loginModal');
+      } catch (err) {
+        alert("Error al registrarse: " + err.message);
+      }
+    };
 
-      window.toggleAuth = () => {
-        if (window.currentUser) {
-          signOut(auth).then(() => {
-            window.location.href = window.location.pathname;
-          });
-        } else {
-          window.toggleModal('loginModal');
-        }
-      };
-    } catch (firebaseErr) {
-      console.error("Error inicializando Firebase:", firebaseErr);
-      window.toggleAuth = () => window.toggleModal('loginModal');
-    }
+    window.toggleAuth = () => {
+      if (window.currentUser) {
+        signOut(auth).then(() => {
+          window.location.href = window.location.pathname;
+        });
+      } else {
+        window.toggleModal('loginModal');
+      }
+    };
   </script>
 </body>
 </html>
