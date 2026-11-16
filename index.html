@@ -23,6 +23,7 @@
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
+    /* Scrollbar estilizada */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0d0d0f; border-radius: 10px; }
     ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.45); border-radius: 10px; }
@@ -68,6 +69,7 @@
       backdrop-filter: blur(20px);
     }
 
+    /* Animaciones dinámicas (Mejora 4) */
     @keyframes modalPopIn {
       0% { opacity: 0; transform: scale(0.94) translateY(12px); }
       100% { opacity: 1; transform: scale(1) translateY(0); }
@@ -78,7 +80,7 @@
     }
     @keyframes badgePulse {
       0% { transform: scale(0.95); }
-      50% { transform: scale(1.03); }
+      50% { transform: scale(1.04); }
       100% { transform: scale(1); }
     }
 
@@ -100,4 +102,1172 @@
       transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .track-row:hover .score-pill {
-      transform: scale(1
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-14 selection:bg-yellow-500/30 selection:text-yellow-200">
+
+  <!-- ENCABEZADO PRINCIPAL -->
+  <header class="border-b border-neutral-800/90 bg-black/85 sticky top-0 z-40 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- LOGO -->
+      <div class="flex items-center gap-3 cursor-pointer group" onclick="switchView('albums')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E6C770] via-[#D4AF37] to-[#8C6A22] flex items-center justify-center text-black font-black text-xl shadow-lg group-hover:scale-105 transition-transform">
+          R
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-black tracking-wider uppercase gold-gradient-text leading-none">RANKING BLASTICO</h1>
+          <p id="headerSubtitle" class="text-[11px] text-neutral-400 mt-1">Cargando catálogo...</p>
+        </div>
+      </div>
+
+      <!-- BUSCADOR -->
+      <div class="relative flex-1 max-w-md w-full">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500 text-sm"></i>
+        <input type="text" id="searchInput" oninput="renderApp()" placeholder="Buscar por álbum, artista, ft o sencillo..." 
+               class="w-full bg-neutral-900/90 border border-neutral-800 rounded-full pl-10 pr-4 py-2 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-yellow-500/70 transition">
+      </div>
+
+      <!-- BOTONES DE NAVEGACIÓN -->
+      <div class="flex items-center gap-2 flex-wrap w-full lg:w-auto justify-center lg:justify-end">
+        <button id="viewAlbumsBtn" onclick="switchView('albums')" class="px-3.5 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 border border-yellow-500/50 text-xs font-bold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-compact-disc"></i> Álbumes
+        </button>
+        <button id="viewSinglesBtn" onclick="switchView('singles')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5 relative">
+          <i class="fa-solid fa-music"></i> Sencillos
+          <span class="bg-yellow-500 text-black text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase">Nuevo</span>
+        </button>
+        <button id="viewArtistsBtn" onclick="switchView('artists')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-users"></i> Artistas
+        </button>
+        
+        <button onclick="toggleModal('legendModal')" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:text-yellow-400 hover:border-yellow-600/40 text-xs font-semibold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-list-ol"></i> Guía
+        </button>
+
+        <button id="shareBtn" onclick="shareProfile()" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:bg-neutral-800 text-xs font-semibold transition hidden items-center gap-1.5">
+          <i class="fa-solid fa-share-nodes"></i> Compartir
+        </button>
+        
+        <button id="authBtn" onclick="toggleAuth()" class="px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:bg-neutral-800 text-xs font-semibold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-lock"></i> Iniciar Sesión
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PANEL PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 mt-6">
+    
+    <!-- BANNER MODO LECTURA (PERFIL DE TERCERO) -->
+    <div id="viewModeBanner" class="hidden mb-6 bg-neutral-900/90 border border-yellow-500/40 p-3.5 rounded-2xl text-sm flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+      <div class="flex items-center gap-2.5 text-neutral-200">
+        <span class="w-8 h-8 rounded-full bg-yellow-500/15 border border-yellow-500/40 flex items-center justify-center text-yellow-400">
+          <i class="fa-solid fa-eye"></i>
+        </span>
+        <span>Estás viendo el ranking público de otro usuario. Abre cualquier álbum para copiarlo a tu cuenta.</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a id="goMyRankingBtn" href="?" class="gold-btn px-4 py-1.5 rounded-full text-xs">
+          Ir a mi cuenta
+        </a>
+      </div>
+    </div>
+
+    <!-- BARRA DE ACCIONES RÁPIDAS (AÑADIR / PEGAR ÁLBUM COPIADO) -->
+    <div id="userActionsBar" class="hidden mb-6 flex flex-wrap items-center justify-between gap-3 bg-neutral-900/40 border border-neutral-800/80 p-3 rounded-2xl">
+      <div class="flex items-center gap-2 text-xs text-neutral-400">
+        <i class="fa-solid fa-sparkles text-yellow-500"></i>
+        <span>Gestiona tu colección musical</span>
+      </div>
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <!-- Botón de pegar álbum si hay uno copiado de un tercero (Mejora 1) -->
+        <button id="pasteAlbumBtn" onclick="pasteCopiedAlbum()" class="hidden px-4 py-2 rounded-full bg-yellow-500/15 border border-yellow-500/60 text-yellow-300 hover:bg-yellow-500/25 text-xs font-bold transition flex items-center gap-1.5 animate-pulse">
+          <i class="fa-solid fa-paste"></i> Pegar Álbum Copiado (<span id="copiedAlbumNameBadge"></span>)
+        </button>
+
+        <button onclick="openSingleModal()" class="px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700 text-xs font-bold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-plus text-yellow-400"></i> Añadir Sencillo
+        </button>
+
+        <button onclick="openAddModal()" class="gold-btn px-4 py-2 rounded-full text-xs flex items-center gap-1.5">
+          <i class="fa-solid fa-plus"></i> Añadir Álbum
+        </button>
+      </div>
+    </div>
+
+    <!-- PANEL DE ESTADÍSTICAS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="glass-card p-4">
+        <p class="text-[11px] text-neutral-400 uppercase tracking-wider font-semibold">Álbumes en Galería</p>
+        <p id="statTotalAlbums" class="text-3xl font-black text-white mt-1">0</p>
+      </div>
+      <div class="glass-card p-4">
+        <p class="text-[11px] text-neutral-400 uppercase tracking-wider font-semibold">JOYITAS (94-99)</p>
+        <p id="statJoyitas" class="text-3xl font-black text-neutral-200 mt-1">0</p>
+      </div>
+      <div class="glass-card p-4">
+        <p class="text-[11px] text-neutral-400 uppercase tracking-wider font-semibold">BLASTICO / PONEDOR (100)</p>
+        <p id="statPonedor" class="text-3xl font-black text-neutral-200 mt-1">0</p>
+      </div>
+      <div class="glass-card p-4">
+        <p class="text-[11px] text-neutral-400 uppercase tracking-wider font-semibold">Total Canciones</p>
+        <p id="statTotalTracks" class="text-3xl font-black gold-text mt-1">0</p>
+      </div>
+    </div>
+
+    <!-- BARRA DE FILTROS Y ORDENAMIENTO -->
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 bg-neutral-900/40 p-3.5 rounded-2xl border border-neutral-800/80">
+      <div class="flex items-center gap-2 flex-wrap" id="genreFilters"></div>
+      <div class="flex items-center gap-2 self-end md:self-auto">
+        <span class="text-xs text-neutral-400 font-semibold"><i class="fa-solid fa-sort text-yellow-500/80"></i> Ordenar:</span>
+        <select id="sortSelect" onchange="renderApp()" class="bg-neutral-900 border border-neutral-700 text-xs text-white rounded-full px-3.5 py-1.5 focus:outline-none focus:border-yellow-500">
+          <option value="score-desc">Mejor Puntuación (Mayor a Menor)</option>
+          <option value="score-asc">Peor Puntuación (Menor a Mayor)</option>
+          <option value="year-desc">Año: Más reciente</option>
+          <option value="title-asc">Nombre (A-Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- GRILLA DE CONTENIDO -->
+    <div id="mainContainer">
+      <!-- Vista Álbumes -->
+      <div id="albumsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5"></div>
+      
+      <!-- Vista Sencillos (Mejora 3) -->
+      <div id="singlesList" class="hidden space-y-3 max-w-4xl mx-auto"></div>
+
+      <!-- Vista Artistas (Mejoras 3, 6, 7) -->
+      <div id="artistsList" class="hidden space-y-3 max-w-4xl mx-auto"></div>
+    </div>
+  </main>
+
+  <!-- MODAL DE LOGIN / REGISTRO -->
+  <div id="loginModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="modal-glass rounded-2xl max-w-sm w-full p-6 relative animate-modal">
+      <button onclick="toggleModal('loginModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-800/80 text-neutral-400 hover:text-white flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 class="text-xl font-bold text-white mb-4">Iniciar Sesión o Registrarse</h3>
+      
+      <button onclick="loginWithGoogle()" class="w-full bg-white text-black hover:bg-neutral-200 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 mb-4 transition">
+        <i class="fa-brands fa-google"></i> Continuar con Google
+      </button>
+
+      <div class="relative flex py-2 items-center">
+        <div class="flex-grow border-t border-neutral-800"></div>
+        <span class="flex-shrink mx-4 text-xs text-neutral-500">o con email</span>
+        <div class="flex-grow border-t border-neutral-800"></div>
+      </div>
+
+      <form onsubmit="handleLogin(event)" class="space-y-3 mt-2">
+        <div>
+          <label class="block text-xs text-neutral-400 mb-1">Email</label>
+          <input type="email" id="loginEmail" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-neutral-400 mb-1">Contraseña (mínimo 6 caracteres)</label>
+          <input type="password" id="loginPassword" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="submit" class="flex-1 gold-btn py-2.5 rounded-xl text-sm">Entrar</button>
+          <button type="button" onclick="handleRegister(event)" class="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white py-2.5 rounded-xl text-sm font-bold border border-neutral-700 transition">Registrarse</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE DETALLES DEL ÁLBUM -->
+  <div id="detailModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="modal-glass rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 relative animate-modal">
+      <div id="detailModalContent"></div>
+    </div>
+  </div>
+
+  <!-- MODAL PARA AÑADIR / EDITAR ÁLBUM -->
+  <div id="albumFormModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="modal-glass rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative animate-modal">
+      <button onclick="toggleModal('albumFormModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 id="formModalTitle" class="text-xl font-bold text-white mb-4">Añadir Nuevo Álbum</h3>
+      
+      <form id="albumForm" onsubmit="saveAlbum(event)" class="space-y-4">
+        <input type="hidden" id="editAlbumId">
+        <div>
+          <label class="block text-xs text-neutral-400 mb-1">Título del Álbum *</label>
+          <input type="text" id="formTitle" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs text-neutral-400 mb-1">Artista Principal *</label>
+            <input type="text" id="formArtist" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-neutral-400 mb-1">Año de Lanzamiento</label>
+            <input type="number" id="formYear" min="1900" max="2099" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-neutral-400 mb-1">Género Musical *</label>
+          <input type="text" id="formGenre" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-neutral-400 mb-1">Portada del Álbum</label>
+          <div class="space-y-2">
+            <input type="file" id="formCoverFile" accept="image/*" onchange="handleFileSelect(event, 'formCoverUrl')" class="w-full text-xs text-neutral-400 bg-neutral-900 rounded-xl p-2 border border-neutral-700">
+            <input type="url" id="formCoverUrl" placeholder="O pega un enlace de imagen (http...)" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <label class="text-xs text-neutral-400">Canciones, Colaboraciones (ft.) y Puntuación (1-100)</label>
+            <button type="button" onclick="addTrackInput()" class="text-xs gold-text font-semibold hover:underline"><i class="fa-solid fa-plus"></i> Agregar Tema</button>
+          </div>
+          <div id="tracksInputContainer" class="space-y-2 max-h-56 overflow-y-auto pr-1"></div>
+        </div>
+        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-sm mt-4">Guardar Álbum</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL PARA AÑADIR / EDITAR SENCILLO (MEJORA 3) -->
+  <div id="singleFormModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="modal-glass rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6 relative animate-modal">
+      <button onclick="toggleModal('singleFormModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 id="singleModalTitle" class="text-xl font-bold text-white mb-4">Rankear Sencillo</h3>
+      
+      <form id="singleForm" onsubmit="saveSingle(event)" class="space-y-4">
+        <input type="hidden" id="editSingleId">
+        <div>
+          <label class="block text-xs text-neutral-400 mb-1">Nombre del Sencillo *</label>
+          <input type="text" id="singleTitle" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-neutral-400 mb-1">Artista Principal *</label>
+            <input type="text" id="singleArtist" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-neutral-400 mb-1">Ft. (Artista Invitado)</label>
+            <input type="text" id="singleFt" placeholder="Ej: Duki, Quevedo" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-neutral-400 mb-1">Género *</label>
+            <input type="text" id="singleGenre" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-neutral-400 mb-1">Año</label>
+            <input type="number" id="singleYear" min="1900" max="2099" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-neutral-400 mb-1">Puntuación (1 a 100) *</label>
+          <input type="number" id="singleScore" min="1" max="100" step="0.01" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white font-bold focus:border-yellow-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-neutral-400 mb-1">Portada del Sencillo</label>
+          <div class="space-y-2">
+            <input type="file" accept="image/*" onchange="handleFileSelect(event, 'singleCoverUrl')" class="w-full text-xs text-neutral-400 bg-neutral-900 rounded-xl p-2 border border-neutral-700">
+            <input type="url" id="singleCoverUrl" placeholder="O pega un enlace de imagen (http...)" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2 text-sm text-white focus:border-yellow-500 focus:outline-none">
+          </div>
+        </div>
+        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-sm mt-2">Guardar Sencillo</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL GUÍA DE PUNTUACIONES -->
+  <div id="legendModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="modal-glass rounded-3xl max-w-md w-full p-6 relative animate-modal">
+      <button onclick="toggleModal('legendModal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-neutral-800 text-neutral-400 hover:text-white flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+        <i class="fa-solid fa-trophy gold-text"></i> Guías de Puntuación
+      </h3>
+
+      <div class="flex border-b border-neutral-800 mb-4">
+        <button id="guideTabAlbums" onclick="switchGuideTab('albums')" class="flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400">
+          Álbumes
+        </button>
+        <button id="guideTabTracks" onclick="switchGuideTab('tracks')" class="flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white">
+          Canciones / Sencillos
+        </button>
+      </div>
+
+      <div class="space-y-2 max-h-[60vh] overflow-y-auto text-sm pr-1" id="legendList"></div>
+    </div>
+  </div>
+
+  <!-- TOAST DE NOTIFICACIÓN -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden bg-neutral-900 border border-yellow-500/60 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm animate-modal">
+    <i class="fa-solid fa-circle-check text-yellow-400 text-lg"></i>
+    <span id="toastMessage">Acción completada</span>
+  </div>
+
+  <!-- SDKs DE FIREBASE Y LÓGICA DE APLICACIÓN -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getDatabase, ref, onValue, push, set, remove, update 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { 
+      getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, 
+      signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDNG0QICIscO7dpKVgr_mgoBgXOVnR-lOU",
+      authDomain: "ranking-blastico-698d8.firebaseapp.com",
+      databaseURL: "https://ranking-blastico-698d8-default-rtdb.firebaseio.com",
+      projectId: "ranking-blastico-698d8",
+      storageBucket: "ranking-blastico-698d8.appspot.com",
+      messagingSenderId: "650938268028",
+      appId: "1:650938268028:web:d175c147ce0c748d31ccf9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+    const googleProvider = new GoogleAuthProvider();
+
+    window.currentUser = null;
+    window.isReadOnly = false;
+    window.targetUid = null;
+    window.albums = [];
+    window.singles = [];
+    window.currentView = 'albums';
+    window.selectedGenre = 'Todos';
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const sharedUser = urlParams.get('user');
+
+    onAuthStateChanged(auth, (user) => {
+      window.currentUser = user;
+      const authBtn = document.getElementById('authBtn');
+      const userActionsBar = document.getElementById('userActionsBar');
+      const shareBtn = document.getElementById('shareBtn');
+      const banner = document.getElementById('viewModeBanner');
+
+      if (sharedUser) {
+        window.isReadOnly = true;
+        window.targetUid = sharedUser;
+        authBtn.style.display = user ? 'flex' : 'flex';
+        authBtn.innerHTML = user ? `<i class="fa-solid fa-right-from-bracket"></i> Salir` : `<i class="fa-solid fa-lock"></i> Iniciar Sesión`;
+        userActionsBar.classList.add('hidden');
+        shareBtn.classList.add('hidden');
+        banner.classList.remove('hidden');
+        document.getElementById('headerSubtitle').innerText = "Perfil de Tercero (Modo Lectura)";
+      } else if (user) {
+        window.isReadOnly = false;
+        window.targetUid = user.uid;
+        authBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> Salir`;
+        userActionsBar.classList.remove('hidden');
+        shareBtn.classList.remove('hidden');
+        shareBtn.classList.add('flex');
+        banner.classList.add('hidden');
+        document.getElementById('headerSubtitle').innerText = `Mi Catálogo (${user.email || user.displayName})`;
+        checkCopiedAlbum();
+      } else {
+        window.isReadOnly = true;
+        window.targetUid = null;
+        authBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Iniciar Sesión / Registrarse`;
+        userActionsBar.classList.add('hidden');
+        shareBtn.classList.add('hidden');
+        banner.classList.add('hidden');
+        document.getElementById('headerSubtitle').innerText = "Inicia sesión para gestionar tu ranking";
+      }
+
+      loadUserData();
+    });
+
+    function loadUserData() {
+      if (!window.targetUid) {
+        window.albums = [];
+        window.singles = [];
+        renderApp();
+        return;
+      }
+
+      // Cargar Álbumes
+      const userAlbumsRef = ref(db, `users/${window.targetUid}/albums`);
+      onValue(userAlbumsRef, (snapshot) => {
+        const data = snapshot.val();
+        window.albums = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+        renderApp();
+      });
+
+      // Cargar Sencillos (Mejora 3)
+      const userSinglesRef = ref(db, `users/${window.targetUid}/singles`);
+      onValue(userSinglesRef, (snapshot) => {
+        const data = snapshot.val();
+        window.singles = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+        renderApp();
+      });
+    }
+
+    // --- FUNCIONES DE COPIAR Y PEGAR ÁLBUM DE TERCERO (MEJORA 1) ---
+    window.copyAlbumToClipboard = (albumId) => {
+      const album = window.albums.find(a => a.id === albumId);
+      if (!album) return;
+      const { id, ...cleanAlbum } = album;
+      localStorage.setItem('rb_copied_album', JSON.stringify(cleanAlbum));
+      showToast(`"${album.title}" copiado. Ve a tu cuenta para pegarlo.`);
+      checkCopiedAlbum();
+    };
+
+    window.checkCopiedAlbum = () => {
+      const raw = localStorage.getItem('rb_copied_album');
+      const btn = document.getElementById('pasteAlbumBtn');
+      const badge = document.getElementById('copiedAlbumNameBadge');
+      if (raw && !window.isReadOnly && window.currentUser) {
+        try {
+          const parsed = JSON.parse(raw);
+          badge.innerText = parsed.title;
+          btn.classList.remove('hidden');
+        } catch (e) {
+          btn.classList.add('hidden');
+        }
+      } else {
+        btn.classList.add('hidden');
+      }
+    };
+
+    window.pasteCopiedAlbum = async () => {
+      if (window.isReadOnly || !window.currentUser) return;
+      const raw = localStorage.getItem('rb_copied_album');
+      if (!raw) return;
+      try {
+        const albumData = JSON.parse(raw);
+        await saveAlbumToFirebase(albumData, null);
+        localStorage.removeItem('rb_copied_album');
+        checkCopiedAlbum();
+        showToast(`¡Álbum "${albumData.title}" agregado a tu catálogo!`);
+      } catch (err) {
+        alert("Error al pegar el álbum: " + err.message);
+      }
+    };
+
+    // --- FIREBASE CRUD ---
+    window.saveAlbumToFirebase = async (albumData, id) => {
+      if (window.isReadOnly || !window.currentUser) {
+        alert("No tienes permisos para modificar este catálogo.");
+        return;
+      }
+      const userAlbumsRef = ref(db, `users/${window.currentUser.uid}/albums`);
+      if (id) {
+        await update(ref(db, `users/${window.currentUser.uid}/albums/${id}`), albumData);
+      } else {
+        await set(push(userAlbumsRef), albumData);
+      }
+    };
+
+    window.deleteAlbumFromFirebase = async (id) => {
+      if (window.isReadOnly || !window.currentUser) return;
+      if (confirm("¿Seguro que quieres eliminar este álbum?")) {
+        await remove(ref(db, `users/${window.currentUser.uid}/albums/${id}`));
+        toggleModal('detailModal');
+        showToast("Álbum eliminado");
+      }
+    };
+
+    window.saveSingleToFirebase = async (singleData, id) => {
+      if (window.isReadOnly || !window.currentUser) return;
+      const userSinglesRef = ref(db, `users/${window.currentUser.uid}/singles`);
+      if (id) {
+        await update(ref(db, `users/${window.currentUser.uid}/singles/${id}`), singleData);
+      } else {
+        await set(push(userSinglesRef), singleData);
+      }
+    };
+
+    window.deleteSingleFromFirebase = async (id) => {
+      if (window.isReadOnly || !window.currentUser) return;
+      if (confirm("¿Eliminar este sencillo?")) {
+        await remove(ref(db, `users/${window.currentUser.uid}/singles/${id}`));
+        showToast("Sencillo eliminado");
+      }
+    };
+
+    // --- AUTENTICACIÓN ---
+    window.shareProfile = () => {
+      if (!window.currentUser) return;
+      const profileUrl = `${window.location.origin}${window.location.pathname}?user=${window.currentUser.uid}`;
+      navigator.clipboard.writeText(profileUrl);
+      showToast("Enlace de perfil público copiado al portapapeles");
+    };
+
+    window.loginWithGoogle = async () => {
+      try {
+        await signInWithPopup(auth, googleProvider);
+        toggleModal('loginModal');
+      } catch (err) {
+        alert("Error al iniciar con Google: " + err.message);
+      }
+    };
+
+    window.handleLogin = async (e) => {
+      e.preventDefault();
+      try {
+        await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
+        toggleModal('loginModal');
+      } catch (err) {
+        alert("Error al iniciar sesión: " + err.message);
+      }
+    };
+
+    window.handleRegister = async (e) => {
+      e.preventDefault();
+      try {
+        await createUserWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
+        showToast("¡Cuenta creada con éxito!");
+        toggleModal('loginModal');
+      } catch (err) {
+        alert("Error al registrarse: " + err.message);
+      }
+    };
+
+    window.toggleAuth = () => {
+      if (window.currentUser) {
+        signOut(auth).then(() => {
+          window.location.href = window.location.pathname;
+        });
+      } else {
+        toggleModal('loginModal');
+      }
+    };
+  </script>
+
+  <!-- LÓGICA DE INTERFAZ, CÁLCULOS Y RENDERIZADO -->
+  <script>
+    const DEFAULT_COVER = "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=600&q=80";
+
+    // SISTEMA DE CALIFICACIÓN Y COLORES (RESPETANDO LOS COLORES ORIGINALES DE PUNTUACIÓN)
+    function getTrackRatingInfo(score) {
+      const s = Number(score);
+      if (s === 100) return { label: "Ponedor", bg: "#7c4dff", text: "#ffffff" };
+      if (s >= 94)  return { label: "JOYITA", bg: "#9c27b0", text: "#ffffff" };
+      if (s >= 86)  return { label: "ES UNA BANDAA", bg: "#2e7d32", text: "#ffffff" };
+      if (s >= 82)  return { label: "Primee", bg: "#43a047", text: "#ffffff" };
+      if (s >= 76)  return { label: "Lindaaaa", bg: "#66bb6a", text: "#0a0a0a" };
+      if (s >= 70)  return { label: "me gusta", bg: "#4caf50", text: "#0a0a0a" };
+      if (s >= 60)  return { label: "Safable", bg: "#fbc02d", text: "#0a0a0a" };
+      if (s >= 50)  return { label: "No me gusta", bg: "#f57c00", text: "#ffffff" };
+      return { label: "Inescuchable", bg: "#d32f2f", text: "#ffffff" };
+    }
+
+    function getAlbumRatingInfo(avg) {
+      const s = Number(avg);
+      if (s === 100) return { label: "BLASTICO / PONEDOR", color: "#b388ff" };
+      if (s >= 94)  return { label: "JOYITA", color: "#ce93d8" };
+      if (s >= 86)  return { label: "ES UNA BANDAA", color: "#81c784" };
+      if (s >= 82)  return { label: "PRIMEE", color: "#a5d6a7" };
+      if (s >= 75)  return { label: "BUEN ÁLBUM", color: "#c8e6c9" };
+      if (s >= 60)  return { label: "SAFABLE", color: "#fff59d" };
+      return { label: "FLOJO", color: "#ef9a9a" };
+    }
+
+    // PROMEDIO CON 2 DECIMALES EXACTOS (MEJORA 5)
+    function calculateAlbumAverage(tracks) {
+      if (!tracks || tracks.length === 0) return 0;
+      const sum = tracks.reduce((acc, t) => acc + (parseFloat(t.score) || 0), 0);
+      return Number((sum / tracks.length).toFixed(2));
+    }
+
+    function formatScore(num) {
+      return Number(num || 0).toFixed(2);
+    }
+
+    // ESCUDO DORADO SVG (TAL COMO EN LA IMAGEN DE DISEÑO)
+    function renderGoldenShield(score, label) {
+      return `
+        <div class="relative flex flex-col items-center justify-center my-3 select-none" style="animation: badgePulse 0.4s ease;">
+          <svg viewBox="0 0 220 155" class="w-48 h-36 drop-shadow-[0_10px_20px_rgba(212,175,55,0.22)]">
+            <defs>
+              <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFF2B2"/>
+                <stop offset="45%" stop-color="#D4AF37"/>
+                <stop offset="100%" stop-color="#8A6620"/>
+              </linearGradient>
+              <linearGradient id="shieldDark" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1E1E22"/>
+                <stop offset="100%" stop-color="#0D0D0F"/>
+              </linearGradient>
+            </defs>
+            
+            <!-- Laureles Izquierdos -->
+            <g fill="url(#goldRim)" opacity="0.9">
+              <ellipse cx="42" cy="95" rx="9" ry="4" transform="rotate(-35 42 95)"/>
+              <ellipse cx="35" cy="80" rx="9" ry="4" transform="rotate(-20 35 80)"/>
+              <ellipse cx="33" cy="64" rx="9" ry="4" transform="rotate(-5 33 64)"/>
+              <ellipse cx="37" cy="48" rx="9" ry="4" transform="rotate(15 37 48)"/>
+              <ellipse cx="52" cy="108" rx="9" ry="4" transform="rotate(-50 52 108)"/>
+            </g>
+
+            <!-- Laureles Derechos -->
+            <g fill="url(#goldRim)" opacity="0.9">
+              <ellipse cx="178" cy="95" rx="9" ry="4" transform="rotate(35 178 95)"/>
+              <ellipse cx="185" cy="80" rx="9" ry="4" transform="rotate(20 185 80)"/>
+              <ellipse cx="187" cy="64" rx="9" ry="4" transform="rotate(5 187 64)"/>
+              <ellipse cx="183" cy="48" rx="9" ry="4" transform="rotate(-15 183 48)"/>
+              <ellipse cx="168" cy="108" rx="9" ry="4" transform="rotate(50 168 108)"/>
+            </g>
+
+            <!-- Escudo Central -->
+            <path d="M110 14 L166 34 L166 84 C166 116 110 140 110 140 C110 140 54 116 54 84 L54 34 Z" 
+                  fill="url(#shieldDark)" stroke="url(#goldRim)" stroke-width="5"/>
+            <path d="M110 21 L159 39 L159 83 C159 110 110 132 110 132 C110 132 61 110 61 83 L61 39 Z" 
+                  fill="none" stroke="url(#goldRim)" stroke-width="1" opacity="0.5"/>
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center pt-1">
+            <span class="text-3xl font-black text-white tracking-tight">${formatScore(score)}</span>
+            <span class="text-[11px] font-extrabold tracking-widest uppercase mt-0.5 text-[#E6C770]">${label}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // NAVEGACIÓN ENTRE PESTAÑAS
+    function switchView(view) {
+      window.currentView = view;
+      const views = ['albums', 'singles', 'artists'];
+      views.forEach(v => {
+        const btn = document.getElementById(`view${v.charAt(0).toUpperCase() + v.slice(1)}Btn`);
+        if (v === view) {
+          btn.className = "px-3.5 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 border border-yellow-500/50 text-xs font-bold transition flex items-center gap-1.5";
+        } else {
+          btn.className = "px-3.5 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-600 text-xs font-semibold transition flex items-center gap-1.5";
+        }
+      });
+
+      document.getElementById('albumsGrid').classList.toggle('hidden', view !== 'albums');
+      document.getElementById('singlesList').classList.toggle('hidden', view !== 'singles');
+      document.getElementById('artistsList').classList.toggle('hidden', view !== 'artists');
+      renderApp();
+    }
+
+    // RENDERIZADO PRINCIPAL
+    function renderApp() {
+      const albums = window.albums || [];
+      const singles = window.singles || [];
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const sortBy = document.getElementById('sortSelect').value;
+
+      // 1. Calcular promedios y estadísticas
+      let joyitasCount = 0;
+      let ponedorCount = 0;
+      let totalTracks = singles.length;
+
+      const enrichedAlbums = albums.map(album => {
+        const avg = calculateAlbumAverage(album.tracks);
+        if (avg === 100) ponedorCount++;
+        else if (avg >= 94) joyitasCount++;
+        totalTracks += (album.tracks ? album.tracks.length : 0);
+        return { ...album, avg };
+      });
+
+      document.getElementById('statTotalAlbums').innerText = albums.length;
+      document.getElementById('statJoyitas').innerText = joyitasCount;
+      document.getElementById('statPonedor').innerText = ponedorCount;
+      document.getElementById('statTotalTracks').innerText = totalTracks;
+
+      // 2. Filtros de Género
+      const allGenres = ['Todos', ...new Set([
+        ...albums.map(a => a.genre).filter(Boolean),
+        ...singles.map(s => s.genre).filter(Boolean)
+      ])];
+
+      const filtersEl = document.getElementById('genreFilters');
+      filtersEl.innerHTML = allGenres.map(g => {
+        const active = window.selectedGenre === g;
+        return `
+          <button onclick="setGenreFilter('${g}')" 
+                  class="px-3.5 py-1 rounded-full text-xs font-semibold transition ${
+                    active 
+                      ? 'bg-yellow-500/15 text-yellow-300 border border-yellow-500/60' 
+                      : 'bg-neutral-900 text-neutral-400 border border-neutral-800 hover:border-neutral-600'
+                  }">
+            ${g === 'Todos' ? 'Todos los Géneros' : g}
+          </button>
+        `;
+      }).join('');
+
+      // 3. Renderizar vista activa
+      if (window.currentView === 'albums') {
+        renderAlbumsGrid(enrichedAlbums, query, sortBy);
+      } else if (window.currentView === 'singles') {
+        renderSinglesList(singles, query, sortBy);
+      } else if (window.currentView === 'artists') {
+        renderArtistsList(enrichedAlbums, singles, query, sortBy);
+      }
+    }
+
+    function setGenreFilter(genre) {
+      window.selectedGenre = genre;
+      renderApp();
+    }
+
+    function renderAlbumsGrid(albums, query, sortBy) {
+      const grid = document.getElementById('albumsGrid');
+      let filtered = albums.filter(a => {
+        const matchesGenre = window.selectedGenre === 'Todos' || a.genre === window.selectedGenre;
+        const trackMatch = (a.tracks || []).some(t => 
+          (t.name || '').toLowerCase().includes(query) || 
+          (t.ft || '').toLowerCase().includes(query)
+        );
+        const matchesQuery = !query || 
+          (a.title || '').toLowerCase().includes(query) || 
+          (a.artist || '').toLowerCase().includes(query) || 
+          (a.genre || '').toLowerCase().includes(query) ||
+          trackMatch;
+        return matchesGenre && matchesQuery;
+      });
+
+      filtered.sort((a, b) => {
+        if (sortBy === 'score-desc') return b.avg - a.avg;
+        if (sortBy === 'score-asc') return a.avg - b.avg;
+        if (sortBy === 'year-desc') return (b.year || 0) - (a.year || 0);
+        if (sortBy === 'title-asc') return (a.title || '').localeCompare(b.title || '');
+        return 0;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-16 text-neutral-500 text-sm">No hay álbumes para mostrar.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((album, idx) => `
+        <div onclick="openAlbumDetail('${album.id}')" style="animation-delay: ${idx * 30}ms" 
+             class="glass-card overflow-hidden cursor-pointer group flex flex-col animate-card">
+          <div class="relative aspect-square overflow-hidden bg-neutral-900">
+            <img src="${album.cover || DEFAULT_COVER}" alt="${album.title}" 
+                 onerror="this.src='${DEFAULT_COVER}'"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <span class="absolute bottom-2.5 right-2.5 bg-black/85 border border-yellow-500/50 text-white font-black text-xs px-2.5 py-1 rounded-lg backdrop-blur-md shadow-lg">
+              ${formatScore(album.avg)}
+            </span>
+          </div>
+          <div class="p-3.5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-white text-sm truncate group-hover:text-yellow-300 transition">${album.title}</h3>
+              <p class="text-xs text-neutral-400 truncate mt-0.5">${album.artist}</p>
+            </div>
+            <div class="flex items-center justify-between mt-3 pt-2 border-t border-neutral-800/80 text-[11px] text-neutral-500">
+              <span>${album.genre || 'Sin género'}</span>
+              <span>${album.year || ''}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // RENDERIZAR SENCILLOS (MEJORA 3)
+    function renderSinglesList(singles, query, sortBy) {
+      const container = document.getElementById('singlesList');
+      let filtered = singles.filter(s => {
+        const matchesGenre = window.selectedGenre === 'Todos' || s.genre === window.selectedGenre;
+        const matchesQuery = !query || 
+          (s.title || '').toLowerCase().includes(query) || 
+          (s.artist || '').toLowerCase().includes(query) || 
+          (s.ft || '').toLowerCase().includes(query);
+        return matchesGenre && matchesQuery;
+      });
+
+      filtered.sort((a, b) => {
+        if (sortBy === 'score-desc') return Number(b.score) - Number(a.score);
+        if (sortBy === 'score-asc') return Number(a.score) - Number(b.score);
+        if (sortBy === 'year-desc') return (b.year || 0) - (a.year || 0);
+        return (a.title || '').localeCompare(b.title || '');
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="text-center py-16 text-neutral-500 text-sm">Aún no hay sencillos rankeados.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map((s, idx) => {
+        const rating = getTrackRatingInfo(s.score);
+        const ftText = s.ft ? `<span class="text-neutral-400 font-normal">(ft. ${s.ft})</span>` : '';
+        return `
+          <div style="animation-delay: ${idx * 30}ms" class="glass-card p-3.5 flex items-center justify-between gap-4 animate-card">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <img src="${s.cover || DEFAULT_COVER}" onerror="this.src='${DEFAULT_COVER}'" class="w-12 h-12 rounded-xl object-cover border border-neutral-800">
+              <div class="min-w-0">
+                <h4 class="font-bold text-white text-sm truncate">${s.title} ${ftText}</h4>
+                <p class="text-xs text-neutral-400 truncate">${s.artist} • <span class="text-neutral-500">${s.genre || ''} ${s.year ? '• ' + s.year : ''}</span></p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold shadow" style="background-color: ${rating.bg}; color: ${rating.text};">
+                ${formatScore(s.score)} (${rating.label})
+              </span>
+              ${!window.isReadOnly ? `
+                <button onclick="openSingleModal('${s.id}')" class="text-neutral-400 hover:text-white p-1.5"><i class="fa-solid fa-pen text-xs"></i></button>
+                <button onclick="deleteSingleFromFirebase('${s.id}')" class="text-neutral-400 hover:text-red-400 p-1.5"><i class="fa-solid fa-trash text-xs"></i></button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // RENDERIZAR ARTISTAS (INCLUYE ÁLBUMES, SENCILLOS Y COLABORACIONES FT. + ETIQUETA "Feeling") (MEJORAS 3, 6, 7)
+    function renderArtistsList(albums, singles, query, sortBy) {
+      const container = document.getElementById('artistsList');
+      const artistMap = {};
+
+      const registerScore = (rawName, score) => {
+        if (!rawName) return;
+        // Permite separar múltiples artistas si ponen "Duki, Quevedo" o "Duki & Quevedo"
+        const names = rawName.split(/,|&|\by\b/i).map(n => n.trim()).filter(Boolean);
+        names.forEach(name => {
+          const key = name.toLowerCase();
+          if (!artistMap[key]) {
+            artistMap[key] = { displayName: name, scores: [] };
+          }
+          artistMap[key].scores.push(Number(score));
+        });
+      };
+
+      // Sumar canciones de álbumes (artista principal + artista ft en cada canción)
+      albums.forEach(album => {
+        (album.tracks || []).forEach(track => {
+          const s = Number(track.score);
+          if (!isNaN(s) && s > 0) {
+            registerScore(album.artist, s);
+            if (track.ft) registerScore(track.ft, s);
+          }
+        });
+      });
+
+      // Sumar sencillos (artista principal + artista ft)
+      singles.forEach(single => {
+        const s = Number(single.score);
+        if (!isNaN(s) && s > 0) {
+          registerScore(single.artist, s);
+          if (single.ft) registerScore(single.ft, s);
+        }
+      });
+
+      let artistsArray = Object.values(artistMap).map(item => {
+        const avg = item.scores.reduce((a, b) => a + b, 0) / item.scores.length;
+        return {
+          name: item.displayName,
+          count: item.scores.length,
+          avg: Number(avg.toFixed(2))
+        };
+      });
+
+      if (query) {
+        artistsArray = artistsArray.filter(a => a.name.toLowerCase().includes(query));
+      }
+
+      artistsArray.sort((a, b) => {
+        if (sortBy === 'score-asc') return a.avg - b.avg;
+        if (sortBy === 'title-asc') return a.name.localeCompare(b.name);
+        return b.avg - a.avg;
+      });
+
+      if (artistsArray.length === 0) {
+        container.innerHTML = `<div class="text-center py-16 text-neutral-500 text-sm">No hay datos de artistas todavía.</div>`;
+        return;
+      }
+
+      container.innerHTML = artistsArray.map((artist, index) => `
+        <div style="animation-delay: ${index * 25}ms" class="glass-card p-4 flex items-center justify-between animate-card">
+          <div class="flex items-center gap-4">
+            <span class="w-8 h-8 rounded-full bg-neutral-900 border border-yellow-500/40 text-yellow-400 font-black text-xs flex items-center justify-center">
+              #${index + 1}
+            </span>
+            <div>
+              <h4 class="font-bold text-white text-base">${artist.name}</h4>
+              <p class="text-xs text-neutral-400">${artist.count} ${artist.count === 1 ? 'participación rankeada' : 'participaciones rankeadas'}</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="text-lg font-black text-white">${formatScore(artist.avg)}</span>
+            <span class="text-xs font-semibold text-neutral-400 ml-1">(Feeling)</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // DETALLE DE ÁLBUM (CON ESCUDO DORADO, BOTONES SEPARADOS Y BOTÓN COPIAR EN MODO TERCERO) (MEJORAS 1, 2, 4, 5, 7)
+    function openAlbumDetail(albumId) {
+      const album = window.albums.find(a => a.id === albumId);
+      if (!album) return;
+
+      const avg = calculateAlbumAverage(album.tracks);
+      const albumRating = getAlbumRatingInfo(avg);
+      const tracks = album.tracks || [];
+
+      const tracksHtml = tracks.length > 0 ? tracks.map((t, i) => {
+        const r = getTrackRatingInfo(t.score);
+        const ftLabel = t.ft ? `<span class="text-neutral-400 font-normal text-xs ml-1">(ft. ${t.ft})</span>` : '';
+        return `
+          <div class="track-row flex items-center justify-between bg-neutral-900/75 border border-neutral-800/90 px-4 py-2.5 rounded-xl">
+            <div class="flex items-center gap-3 min-w-0 pr-3">
+              <span class="text-neutral-500 font-bold text-xs w-5">${i + 1}.</span>
+              <span class="text-sm font-medium text-neutral-100 truncate">${t.name} ${ftLabel}</span>
+            </div>
+            <span class="score-pill shrink-0 px-3 py-1 rounded-full text-xs font-extrabold shadow-sm" style="background-color: ${r.bg}; color: ${r.text};">
+              ${formatScore(t.score)} (${r.label})
+            </span>
+          </div>
+        `;
+      }).join('') : `<p class="text-neutral-500 text-sm">Este álbum no tiene canciones registradas.</p>`;
+
+      document.getElementById('detailModalContent').innerHTML = `
+        <!-- Barra superior del modal con separación amplia entre Editar, Eliminar y Cerrar (Mejora 2) -->
+        <div class="flex items-center justify-between mb-5 pb-3 border-b border-neutral-800/80">
+          <span class="text-[11px] uppercase tracking-widest text-neutral-500 font-bold">Ficha del Álbum</span>
+          <div class="flex items-center gap-6">
+            ${!window.isReadOnly ? `
+              <div class="flex items-center gap-2.5">
+                <button onclick="openEditModal('${album.id}')" class="px-3.5 py-1.5 rounded-full bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-xs font-semibold text-white flex items-center gap-1.5 transition">
+                  <i class="fa-solid fa-pen text-yellow-400"></i> Editar Álbum
+                </button>
+                <button onclick="deleteAlbumFromFirebase('${album.id}')" class="w-8 h-8 rounded-full bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 flex items-center justify-center transition" title="Eliminar álbum">
+                  <i class="fa-solid fa-trash text-xs"></i>
+                </button>
+              </div>
+            ` : ''}
+            <button onclick="toggleModal('detailModal')" class="w-9 h-9 rounded-full bg-neutral-800/90 hover:bg-neutral-700 text-neutral-300 hover:text-white flex items-center justify-center transition ml-2" title="Cerrar">
+              <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-7">
+          <!-- Columna Izquierda: Portada + Escudo Dorado + Botón Copiar (si es perfil de tercero) -->
+          <div class="w-full md:w-56 shrink-0 flex flex-col items-center">
+            <img src="${album.cover || DEFAULT_COVER}" onerror="this.src='${DEFAULT_COVER}'" 
+                 class="w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover border border-neutral-700/80 shadow-2xl">
+            
+            ${renderGoldenShield(avg, albumRating.label)}
+
+            ${window.isReadOnly ? `
+              <button onclick="copyAlbumToClipboard('${album.id}')" 
+                      class="gold-btn w-full py-2 px-3 rounded-xl text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 mt-1">
+                <i class="fa-solid fa-copy"></i> Copiar álbum a mi ranking
+              </button>
+            ` : ''}
+          </div>
+
+          <!-- Columna Derecha: Info y Tracklist -->
+          <div class="flex-1 min-w-0">
+            <h2 class="text-2xl md:text-3xl font-black text-white leading-tight">${album.title}</h2>
+            <p class="text-base font-bold text-[#E6C770] mt-1">${album.artist}</p>
+            <p class="text-xs text-neutral-400 mt-0.5">${album.genre || 'Sin género'} ${album.year ? '• ' + album.year : ''}</p>
+
+            <div class="mt-5">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-3">
+                Canciones (${tracks.length})
+              </h4>
+              <div class="space-y-2 max-h-[340px] overflow-y-auto pr-1.5">
+                ${tracksHtml}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      toggleModal('detailModal');
+    }
+
+    // FORMULARIO DE ÁLBUMES (CON CAMPO FT. EN CADA CANCIÓN) (MEJORA 7)
+    function openAddModal() {
+      document.getElementById('formModalTitle').innerText = "Añadir Nuevo Álbum";
+      document.getElementById('editAlbumId').value = "";
+      document.getElementById('albumForm').reset();
+      document.getElementById('tracksInputContainer').innerHTML = "";
+      addTrackInput();
+      addTrackInput();
+      toggleModal('albumFormModal');
+    }
+
+    function openEditModal(albumId) {
+      const album = window.albums.find(a => a.id === albumId);
+      if (!album) return;
+      toggleModal('detailModal');
+
+      document.getElementById('formModalTitle').innerText = "Editar Álbum";
+      document.getElementById('editAlbumId').value = album.id;
+      document.getElementById('formTitle').value = album.title || "";
+      document.getElementById('formArtist').value = album.artist || "";
+      document.getElementById('formYear').value = album.year || "";
+      document.getElementById('formGenre').value = album.genre || "";
+      document.getElementById('formCoverUrl').value = album.cover || "";
+
+      const container = document.getElementById('tracksInputContainer');
+      container.innerHTML = "";
+      (album.tracks || []).forEach(t => addTrackInput(t.name, t.ft || "", t.score));
+      toggleModal('albumFormModal');
+    }
+
+    function addTrackInput(name = "", ft = "", score = "") {
+      const container = document.getElementById('tracksInputContainer');
+      const div = document.createElement('div');
+      div.className = "flex items-center gap-2";
+      div.innerHTML = `
+        <input type="text" placeholder="Nombre del tema" value="${name}" required 
+               class="track-name flex-1 bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-1.5 text-xs text-white focus:border-yellow-500 focus:outline-none">
+        <input type="text" placeholder="ft. (opcional)" value="${ft}" 
+               class="track-ft w-28 sm:w-32 bg-neutral-900 border border-neutral-700 rounded-xl px-2.5 py-1.5 text-xs text-neutral-300 focus:border-yellow-500 focus:outline-none">
+        <input type="number" placeholder="Pts" min="1" max="100" step="0.01" value="${score}" required 
+               class="track-score w-16 bg-neutral-900 border border-neutral-700 rounded-xl px-2 py-1.5 text-xs text-white text-center font-bold focus:border-yellow-500 focus:outline-none">
+        <button type="button" onclick="this.parentElement.remove()" class="text-neutral-500 hover:text-red-400 px-1">
+          <i class="fa-solid fa-trash text-xs"></i>
+        </button>
+      `;
+      container.appendChild(div);
+    }
+
+    async function saveAlbum(e) {
+      e.preventDefault();
+      const id = document.getElementById('editAlbumId').value;
+      const trackRows = document.querySelectorAll('#tracksInputContainer > div');
+      const tracks = [];
+
+      trackRows.forEach(row => {
+        const name = row.querySelector('.track-name').value.trim();
+        const ft = row.querySelector('.track-ft').value.trim();
+        const score = parseFloat(row.querySelector('.track-score').value);
+        if (name && !isNaN(score)) {
+          tracks.push({ name, ft, score });
+        }
+      });
+
+      const albumData = {
+        title: document.getElementById('formTitle').value.trim(),
+        artist: document.getElementById('formArtist').value.trim(),
+        year: parseInt(document.getElementById('formYear').value) || null,
+        genre: document.getElementById('formGenre').value.trim(),
+        cover: document.getElementById('formCoverUrl').value.trim() || DEFAULT_COVER,
+        tracks
+      };
+
+      await window.saveAlbumToFirebase(albumData, id || null);
+      toggleModal('albumFormModal');
+      showToast(id ? "Álbum actualizado" : "Álbum guardado");
+    }
+
+    // FORMULARIO DE SENCILLOS (MEJORA 3)
+    function openSingleModal(singleId = null) {
+      document.getElementById('singleForm').reset();
+      document.getElementById('editSingleId').value = "";
+      document.getElementById('singleModalTitle').innerText = "Rankear Sencillo";
+
+      if (singleId) {
+        const s = window.singles.find(item => item.id === singleId);
+        if (s) {
+          document.getElementById('singleModalTitle').innerText = "Editar Sencillo";
+          document.getElementById('editSingleId').value = s.id;
+          document.getElementById('singleTitle').value = s.title || "";
+          document.getElementById('singleArtist').value = s.artist || "";
+          document.getElementById('singleFt').value = s.ft || "";
+          document.getElementById('singleGenre').value = s.genre || "";
+          document.getElementById('singleYear').value = s.year || "";
+          document.getElementById('singleScore').value = s.score || "";
+          document.getElementById('singleCoverUrl').value = s.cover || "";
+        }
+      }
+      toggleModal('singleFormModal');
+    }
+
+    async function saveSingle(e) {
+      e.preventDefault();
+      const id = document.getElementById('editSingleId').value;
+      const singleData = {
+        title: document.getElementById('singleTitle').value.trim(),
+        artist: document.getElementById('singleArtist').value.trim(),
+        ft: document.getElementById('singleFt').value.trim(),
+        genre: document.getElementById('singleGenre').value.trim(),
+        year: parseInt(document.getElementById('singleYear').value) || null,
+        score: parseFloat(document.getElementById('singleScore').value),
+        cover: document.getElementById('singleCoverUrl').value.trim() || DEFAULT_COVER
+      };
+
+      await window.saveSingleToFirebase(singleData, id || null);
+      toggleModal('singleFormModal');
+      showToast(id ? "Sencillo actualizado" : "Sencillo guardado");
+    }
+
+    // UTILIDADES
+    function handleFileSelect(event, targetInputId) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        document.getElementById(targetInputId).value = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function toggleModal(modalId) {
+      const el = document.getElementById(modalId);
+      el.classList.toggle('hidden');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMessage').innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3500);
+    }
+
+    // GUÍA DE PUNTUACIONES
+    function switchGuideTab(tab) {
+      const list = document.getElementById('legendList');
+      const tabA = document.getElementById('guideTabAlbums');
+      const tabT = document.getElementById('guideTabTracks');
+
+      if (tab === 'albums') {
+        tabA.className = "flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400";
+        tabT.className = "flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white";
+        list.innerHTML = `
+          <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex justify-between"><span>100</span><span class="font-bold text-[#b388ff]">BLASTICO / PONEDOR</span></div>
+          <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex justify-between"><span>94.00 - 99.99</span><span class="font-bold text-[#ce93d8]">JOYITA</span></div>
+          <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex justify-between"><span>86.00 - 93.99</span><span class="font-bold text-[#81c784]">ES UNA BANDAA</span></div>
+          <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex justify-between"><span>82.00 - 85.99</span><span class="font-bold text-[#a5d6a7]">PRIMEE</span></div>
+          <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex justify-between"><span>75.00 - 81.99</span><span class="font-bold text-[#c8e6c9]">BUEN ÁLBUM</span></div>
+          <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex justify-between"><span>60.00 - 74.99</span><span class="font-bold text-[#fff59d]">SAFABLE</span></div>
+          <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex justify-between"><span>Menor a 60</span><span class="font-bold text-[#ef9a9a]">FLOJO</span></div>
+        `;
+      } else {
+        tabT.className = "flex-1 py-2 text-sm font-bold border-b-2 border-yellow-500 text-yellow-400";
+        tabA.className = "flex-1 py-2 text-sm font-bold border-b-2 border-transparent text-neutral-400 hover:text-white";
+        const ranges = [
+          { range: "100", label: "Ponedor", bg: "#7c4dff", text: "#fff" },
+          { range: "94 - 99", label: "JOYITA", bg: "#9c27b0", text: "#fff" },
+          { range: "86 - 93", label: "ES UNA BANDAA", bg: "#2e7d32", text: "#fff" },
+          { range: "82 - 85", label: "Primee", bg: "#43a047", text: "#fff" },
+          { range: "76 - 81", label: "Lindaaaa", bg: "#66bb6a", text: "#0a0a0a" },
+          { range: "70 - 75", label: "me gusta", bg: "#4caf50", text: "#0a0a0a" },
+          { range: "60 - 69", label: "Safable", bg: "#fbc02d", text: "#0a0a0a" },
+          { range: "50 - 59", label: "No me gusta", bg: "#f57c00", text: "#fff" },
+          { range: "1 - 49", label: "Inescuchable", bg: "#d32f2f", text: "#fff" }
+        ];
+        list.innerHTML = ranges.map(r => `
+          <div class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-between">
+            <span class="text-neutral-300 font-semibold">${r.range}</span>
+            <span class="px-3 py-0.5 rounded-full text-xs font-bold" style="background:${r.bg}; color:${r.text};">${r.label}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Inicializar guía al cargar
+    switchGuideTab('albums');
+  </script>
+</body>
+</html>
